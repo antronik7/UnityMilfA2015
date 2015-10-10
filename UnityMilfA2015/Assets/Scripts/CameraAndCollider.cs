@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraAndCollider : MonoBehaviour
 {
+    private bool FinAscension;
     private Camera Cam;
     private GameObject ObjetInstancie;
     
@@ -15,11 +16,16 @@ public class CameraAndCollider : MonoBehaviour
     {
         Cam = GetComponentInParent<Camera>();
         CameraSpeed = 3.3f;
+        FinAscension = false;
     }
 
     void Update()
     {
-        if(Cam.transform.position.y < HauteurMax)
+        if (Cam.transform.position.y < HauteurMax)
+            Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
+        else
+            FinAscension = true;
+        if (Cam.transform.position.y < HauteurMax + 15 && FinAscension)
             Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
     }
 
@@ -27,7 +33,7 @@ public class CameraAndCollider : MonoBehaviour
     {
         Destroy(other.gameObject);
 
-        if(other.transform.localScale.x > 2)
+        if(other.transform.localScale.x > 2 && !FinAscension)
         {
             ObjetInstancie = Instantiate(Plateforme);
             ObjetInstancie.transform.Translate(Random.Range(-10, 10), Cam.transform.position.y + 8, 0);
@@ -35,5 +41,10 @@ public class CameraAndCollider : MonoBehaviour
             if (Random.Range(0, 4) == 1)
                 Instantiate(Pixel).transform.position = ObjetInstancie.transform.position + (Vector3.up * 0.5f);
         }
+    }
+
+    void TerminerAscension()
+    {
+            
     }
 }
