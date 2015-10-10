@@ -35,7 +35,7 @@ public class CameraAndCollider : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(other.gameObject);
 
