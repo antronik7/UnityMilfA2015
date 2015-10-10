@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     public GameObject btnClavier;
     public GameObject btnManette;
 
-    public int nbrJoueur;
+    static public int nbrJoueur;
     public bool clavier;
 
     public float CameraSpeed = 3.3f;
@@ -41,10 +41,10 @@ public class MainMenu : MonoBehaviour
             faireMouvementCam = false;
         }
 
-        if (faireMouvementBtnJoueur)
+        /*if (faireMouvementBtnJoueur)
         {
-            btnDeuxPlayer.transform.Translate(Vector3.down *  MenuSpeed /** Time.deltaTime*/);
-        }
+            btnDeuxPlayer.transform.Translate(Vector3.down *  MenuSpeed * Time.deltaTime);
+        }*/
 
         /*if (btnDeuxPlayer.transform.position.y < CameraY + 7)
         {
@@ -76,6 +76,7 @@ public class MainMenu : MonoBehaviour
 
         PlayerPrefs.SetInt("nrbJoueur", 3);
         nbrJoueur = 3;
+        Debug.Log(nbrJoueur);
         
         MonterCam();
         DetruireBtnNbrJoueur();
@@ -122,9 +123,9 @@ public class MainMenu : MonoBehaviour
     public void DetruireBtnNbrJoueur()
     {
 
-        faireMouvementBtnJoueur = true;
+        //faireMouvementBtnJoueur = true;
 
-        //btnDeuxPlayer.SetActive(false);
+        btnDeuxPlayer.SetActive(false);
         btnTroisPlayer.SetActive(false);
         btnQuatrePlayer.SetActive(false);
         AfficherBtnControle();
@@ -133,8 +134,8 @@ public class MainMenu : MonoBehaviour
     //Fonction qui detruit les btn pour le choix du nombre de joueur
     public void DetruireBtnControle()
     {
-        Destroy(btnClavier);
-        Destroy(btnManette);
+        btnClavier.SetActive(false);
+        btnManette.SetActive(false);
 
         assignerControle();
     }
@@ -182,9 +183,6 @@ public class MainMenu : MonoBehaviour
 
         clavier = true;
         nbrJoueur = 2;
-
-        /*PlayerPrefs.SetString("1Horizontal", "1HorizontalManette");
-        PlayerPrefs.SetString("1Vertical", "VerticalManette");*/
     }
 
     //Fonction pour assigner les bons controle
@@ -298,5 +296,10 @@ public class MainMenu : MonoBehaviour
         btnTroisPlayer.SetActive(true);
         btnQuatrePlayer.SetActive(true);
         initialiserControle();
+    }
+
+    public int GetNbrJoueur()
+    {
+        return nbrJoueur;
     }
 }
