@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
     public float maxSpeed = 10f;
     public bool facingRight = true;
     public float jumpForce = 200f;
+    public float spawnForce = 600f;
     public bool standing;
     public float airSpeedMultiplier = 0.5f;
     public Rigidbody2D rb2D;
@@ -16,17 +17,25 @@ public class PlayerController : MonoBehaviour {
     public string fireButton = "Fire1";
     public string nomBall = "Ball1(Clone)";
     public bool Gagner = false;
+    public bool disableHurt = false;
+    public bool disableMovement = false;
     public string NomSceneWin = "Win1";
     public AudioClip jumpSound;
+    public GameObject spriteAtari;
+    public GameObject spawner;
 
     private Animator[] animators;
 
-    
+
+    void Awake()
+    {
+        animators = GetComponentsInChildren<Animator>();
+    }
 
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
-        animators = GetComponentsInChildren<Animator>();
+        spriteAtari.SetActive(false);
     }
 
     void FixedUpdate()
@@ -78,7 +87,15 @@ public class PlayerController : MonoBehaviour {
         }
 
         if(transform.position.y < -10)
-            transform.Translate(0,30,0);
+        {
+            transform.position = spawner.transform.position;
+            Vector2 maForce = new Vector2(0, spawnForce);
+            rb2D.velocity = Vector2.zero;
+            rb2D.AddForce(maForce, ForceMode2D.Force);
+            GetComponent<SpriteFlash>().StartFlashing();
+            StartCoroutine(disablePlayerHurt());
+        }
+
     }
 
     // Update is called once per frame
@@ -125,25 +142,28 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (this.GetComponent<PlayerController>().enabled == false)
+        /*if (this.GetComponent<PlayerController>().enabled == false)
         {
             return;
-        }
-
-        if (coll.gameObject.name != nomBall)
+        }*/
+        
+        if(!disableHurt)
         {
-            if(coll.gameObject.tag == "Ball")
+            if (coll.gameObject.name != nomBall)
             {
-                Hurt(coll.transform);
+                if (coll.gameObject.tag == "Ball")
+                {
 
-                Destroy(coll.gameObject);
+                    Hurt(coll.transform);
+
+                    Destroy(coll.gameObject);
+                }
             }
-        }  
+        }
     }
 
     void Hurt(Transform objetHurt)
     {
-        Debug.Log("1");
         if(objetHurt.position.x > transform.position.x)
         {
             Vector2 maForce = new Vector2(-forceHurtX, 0);
@@ -157,5 +177,18 @@ public class PlayerController : MonoBehaviour {
 
         GetComponent<PlayerShoot>().munition -= 10;
         GetComponent<PlayerDisable>().DisablePlayer();
+
+        StartCoroutine(disablePlayerHurt());
+    }
+
+    IEnumerator disablePlayerHurt()
+    {
+        disableHurt = true;
+
+        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(1f);
+
+        disableHurt = false;
     }
 }

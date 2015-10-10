@@ -7,22 +7,41 @@ public class PlayerShoot : MonoBehaviour {
     public string fireButton = "Fire1";
     public string vertiAxis = "Vertical";
     public int munition = 20;
+    public int munitionPrecedente;
+    public int changerAtari;
+    public GameObject spritePixel;
+    public GameObject spriteAtari;
 
     public float timeBetweenShots = 0.3333f;  // Allow 3 shots per second
     public AudioClip shootSound;
 
+    private SpriteRenderer[] sprites;
     private float timestamp;
 
     // Use this for initialization
     void Start () {
-	
+        munitionPrecedente = munition;
+        sprites = GetComponentsInChildren<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
-        //Debug.Log(move);
+        if(munitionPrecedente != munition)
+        {
+            if(munition < changerAtari)
+            {
+                //Play Animation
+                spritePixel.SetActive(true);
+                spriteAtari.SetActive(false);
+            }
+            else if (munition >= changerAtari)
+            {
+                //Play Animation
+                spritePixel.SetActive(false);
+                spriteAtari.SetActive(true);
+            }
+        }
 
         if (Time.time >= timestamp && Input.GetButtonDown(fireButton) && munition >= 1)
         {
@@ -33,9 +52,6 @@ public class PlayerShoot : MonoBehaviour {
 
             int dirX = 0;
             int dirY = 0;
-
-            
-
 
             if (move > 0.45)
             {
@@ -68,5 +84,7 @@ public class PlayerShoot : MonoBehaviour {
         {
             GetComponent<PlayerController>().Gagner = true;
         }
+
+        munitionPrecedente = munition;
     }
 }

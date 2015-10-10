@@ -3,11 +3,11 @@ using System.Collections;
 
 public class SpriteFlash : MonoBehaviour 
 {
-    public SpriteRenderer Sprite;
+    public SpriteRenderer[] Sprites;
 
 	void Start()
     {
-        Sprite = GetComponent<SpriteRenderer>();
+        Sprites = GetComponentsInChildren<SpriteRenderer>();
     }
 
     public void StartFlashing()
@@ -17,12 +17,22 @@ public class SpriteFlash : MonoBehaviour
 
     IEnumerator MaCoroutine()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 10; i++)
+
         {
-            Sprite.enabled = false;
-            yield return new WaitForSeconds(0.2f);
-            Sprite.enabled = true;
-            yield return new WaitForSeconds(0.2f);
+            foreach (SpriteRenderer Sprite in Sprites)
+            {
+                Sprite.enabled = false;
+            }
+            
+            yield return new WaitForSeconds(0.1f);
+
+            foreach (SpriteRenderer Sprite in Sprites)
+            {
+                Sprite.enabled = true;
+            }
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
