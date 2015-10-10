@@ -11,7 +11,10 @@ public class BallController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Mathf.Abs(transform.position.x) > Camera.main.transform.position.x + 20 || Mathf.Abs(transform.position.y) > Camera.main.transform.position.y + 20)
+        {
+            Destroy(gameObject);
+        }
 	}
 
     public void Initialize(int dirX, int dirY)
