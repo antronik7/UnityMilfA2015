@@ -6,7 +6,9 @@ public class CameraAndCollider : MonoBehaviour
     private bool FinAscension;
     private Camera Cam;
     private GameObject ObjetInstancie;
+    private MainMenu Menu;
     
+    public GameObject ScriptMenu;
     public float CameraSpeed;
     public GameObject Pixel;
     public GameObject Plateforme;
@@ -17,16 +19,20 @@ public class CameraAndCollider : MonoBehaviour
         Cam = GetComponentInParent<Camera>();
         CameraSpeed = 3.3f;
         FinAscension = false;
+        Menu = ScriptMenu.GetComponent<MainMenu>();
     }
 
     void Update()
     {
-        if (Cam.transform.position.y < HauteurMax)
-            Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
-        else
-            FinAscension = true;
-        if (Cam.transform.position.y < HauteurMax + 15 && FinAscension)
-            Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
+        if(Menu.CommencerJeu)
+        {
+            if (Cam.transform.position.y < HauteurMax)
+                Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
+            else
+                FinAscension = true;
+            if (Cam.transform.position.y < HauteurMax + 15 && FinAscension)
+                Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
+        }
     }
 
     void OnTriggerExit(Collider other)

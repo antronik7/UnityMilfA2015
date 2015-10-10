@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainMenu : MonoBehaviour {
-
+public class MainMenu : MonoBehaviour 
+{
+    private float CameraY;
+    public bool CommencerJeu;
    // public float CameraSpeed = 0.3f;
     public GameObject btnDeuxPlayer;
     public GameObject btnTroisPlayer;
@@ -18,21 +20,23 @@ public class MainMenu : MonoBehaviour {
     public bool faireMouvementCam = false;
     public float maxMonterCam = 5f;
 
+    void Awake()
+    {
+        CommencerJeu = false;
+    }
+
     //Fonction update du menu. En se moment on s'en sert juste pour faire le mouvement de la cam
     void Update()
     {
         if(faireMouvementCam)
         {
-            Debug.Log("Update je monte");
             Camera.main.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
         }
 
-        if (Camera.main.transform.position.y > maxMonterCam)
+        if (Camera.main.transform.position.y > CameraY + 7)
         {
             faireMouvementCam = false;
         }
-
-
     }
 
     //Fonction qui setActive False les bouton pour les controle
@@ -42,8 +46,8 @@ public class MainMenu : MonoBehaviour {
     }
 
 	//Fonction appeler quand on click sur le bouton btn2Joueur
-	public void deuxJoueurs () {
-
+	public void deuxJoueurs () 
+    {
         PlayerPrefs.SetInt("nrbJoueur", 2);
         nbrJoueur = 2;
 
@@ -95,8 +99,8 @@ public class MainMenu : MonoBehaviour {
     //Fonction qui fait monter la Main Camera POUR LE MOMENT ON SUPPRIME LES BOUTON DE L'ECRAN
     public void MonterCam()
     {
+        CameraY = Camera.main.transform.position.y;
         faireMouvementCam = true;
-        Debug.Log("Jvais monter");
     }
 
     //Fonction qui detruit les btn pour le choix du nombre de joueur
@@ -115,7 +119,6 @@ public class MainMenu : MonoBehaviour {
         Destroy(btnManette);
 
         assignerControle();
-
     }
 
     //Fonction qui affiche les bouton controle
@@ -129,7 +132,7 @@ public class MainMenu : MonoBehaviour {
     //Fonctoin qui load la prochaine Scene
     public void loadGame()
     {
-        Application.LoadLevel("SceneGuillaumeTestJeu");
+        CommencerJeu = true;
     }
 
     //Fonction qui reinitialise les controles des joueurs
@@ -268,7 +271,7 @@ public class MainMenu : MonoBehaviour {
 
         maxMonterCam = maxMonterCam*2;
         faireMouvementCam = true;
-        //loadGame();
+        loadGame();
     }
 
     public void initialiserMenu()
