@@ -13,16 +13,20 @@ public class PlayerController : MonoBehaviour {
     public float forceHurtX = 5f;
     public string HoriAxis = "Horizontal";
     public string jumpBouton = "Jump";
+    public string fireButton = "Fire1";
     public string nomBall = "Ball1(Clone)";
     public bool Gagner = false;
     public string NomSceneWin = "Win1";
     public AudioClip jumpSound;
+
+    private Animator[] animators;
 
     
 
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
+        animators = GetComponentsInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -36,6 +40,21 @@ public class PlayerController : MonoBehaviour {
         else
         {
             rb2D.velocity = new Vector2(move * maxSpeed, rb2D.velocity.y);
+        }
+
+        if(move != 0 && standing)
+        {
+            foreach (Animator animator in animators)
+            {
+                animator.SetInteger("AnimState", 1);
+            }
+        }
+        else
+        {
+            foreach (Animator animator in animators)
+            {
+                animator.SetInteger("AnimState", 0);
+            }
         }
         
 
@@ -77,6 +96,14 @@ public class PlayerController : MonoBehaviour {
         {
             rb2D.AddForce(new Vector2(0, jumpForce));
             AudioSource.PlayClipAtPoint(jumpSound, transform.position, 1f);
+        }
+
+        if(Input.GetButtonDown(fireButton))
+        {
+            foreach (Animator animator in animators)
+            {
+                animator.SetInteger("AnimState", 2);
+            }
         }
 
         if(Gagner)
