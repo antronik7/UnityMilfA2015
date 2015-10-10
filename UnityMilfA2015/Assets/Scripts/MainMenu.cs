@@ -20,6 +20,9 @@ public class MainMenu : MonoBehaviour
     public bool faireMouvementCam = false;
     public float maxMonterCam = 5f;
 
+    public bool faireMouvementBtnJoueur = false;
+    public float MenuSpeed = 0.1f;
+
     void Awake()
     {
         CommencerJeu = false;
@@ -37,6 +40,18 @@ public class MainMenu : MonoBehaviour
         {
             faireMouvementCam = false;
         }
+
+        if (faireMouvementBtnJoueur)
+        {
+            btnDeuxPlayer.transform.Translate(Vector3.down *  MenuSpeed /** Time.deltaTime*/);
+        }
+
+        /*if (btnDeuxPlayer.transform.position.y < CameraY + 7)
+        {
+            faireMouvementCam = false;
+        }*/
+
+
     }
 
     //Fonction qui setActive False les bouton pour les controle
@@ -106,7 +121,10 @@ public class MainMenu : MonoBehaviour
     //Fonction qui detruit les btn pour le choix du nombre de joueur
     public void DetruireBtnNbrJoueur()
     {
-        btnDeuxPlayer.SetActive(false);
+
+        faireMouvementBtnJoueur = true;
+
+        //btnDeuxPlayer.SetActive(false);
         btnTroisPlayer.SetActive(false);
         btnQuatrePlayer.SetActive(false);
         AfficherBtnControle();
