@@ -4,16 +4,25 @@ using System.Collections;
 
 public class MenuPosition : MonoBehaviour {
 	
+    //Un premier tableau comprenant les spirtes des joueurs dans cette ordre (Rouge, Bleu, vert, jaune) que l'on doit drager dans l'interface de unity  
     public GameObject[] joueurs;
+    
+    //Un tableau qui va contenir les ammos de tous les joueurs
     public int[] ammo;
-    public GameObject[] lesPositionDansCanvas;
+    
+    //Tableau qui va contenir la postion des joueurs quand le trie sera effectue. On doit lui donner les diffrentes image des personnage dans l'interface
     public GameObject[] joueursPosition;
     
     //Variable pour garder en memoire la position dans le canvas que l'on veut que chacun aille selon leur ammo
-    public float posPour1erPosition;
-    public float posPour2ePosition;
-    public float posPour3ePosition;
-    public float posPour4ePosition;
+    public float posPour1erPositionX = -6;
+    public float posPour2ePositionX = -6;
+    public float posPour3ePositionX = -6;
+    public float posPour4ePositionX = -6;
+
+    public float posPour1erPositionY = 3;
+    public float posPour2ePositionY = 2;
+    public float posPour3ePositionY = 1;
+    public float posPour4ePositionY = 0;
 
     public int nbrJoueur = 0;
     public MainMenu leMainMenu;
@@ -32,7 +41,7 @@ public class MenuPosition : MonoBehaviour {
             ammo[i] = joueurs[i].GetComponent<PlayerShoot>().munition;
         }
 
-        //Mettre le tableau de joueurs dans le tableau des position pour avoir les meme indexe que dans le tableau de ammo
+
         joueursPosition = joueurs;
 
 
@@ -68,8 +77,8 @@ public class MenuPosition : MonoBehaviour {
 
        //Apres on doit affecter les positions dans le canvas
 
-        joueursPosition[1].gameObject.transform.position = new Vector2(0, posPour1erPosition);
-        joueursPosition[0].gameObject.transform.position = new Vector2(0, posPour2ePosition);
+        joueursPosition[1].gameObject.transform.position = new Vector2(posPour1erPositionX, posPour1erPositionY);
+        joueursPosition[0].gameObject.transform.position = new Vector2(posPour2ePositionX, posPour2ePositionY);
     }
 
     public void trierPour3Joueur()
@@ -94,9 +103,9 @@ public class MenuPosition : MonoBehaviour {
         }
 
         //Apres on doit affecter les positions dans le canvas
-        joueursPosition[2].gameObject.transform.position = new Vector2(0, posPour1erPosition);
-        joueursPosition[1].gameObject.transform.position = new Vector2(0, posPour2ePosition);
-        joueursPosition[0].gameObject.transform.position = new Vector2(0, posPour3ePosition);
+        joueursPosition[2].gameObject.transform.position = new Vector2(posPour1erPositionX, posPour1erPositionY);
+        joueursPosition[1].gameObject.transform.position = new Vector2(posPour2ePositionX, posPour2ePositionY);
+        joueursPosition[0].gameObject.transform.position = new Vector2(posPour3ePositionX, posPour3ePositionY);
 
     }
 
@@ -121,9 +130,9 @@ public class MenuPosition : MonoBehaviour {
         }
 
         //Apres on doit affecter les positions dans le canvas
-        joueursPosition[3].gameObject.transform.position = new Vector2(0, posPour1erPosition);
-        joueursPosition[2].gameObject.transform.position = new Vector2(0, posPour2ePosition);
-        joueursPosition[1].gameObject.transform.position = new Vector2(0, posPour3ePosition);
-        joueursPosition[0].gameObject.transform.position = new Vector2(0, posPour4ePosition);
+        joueursPosition[3].gameObject.transform.position = new Vector2(posPour1erPositionX, posPour1erPositionY);
+        joueursPosition[2].gameObject.transform.position = new Vector2(posPour2ePositionX, posPour2ePositionY);
+        joueursPosition[1].gameObject.transform.position = new Vector2(posPour3ePositionX, posPour3ePositionY);
+        joueursPosition[0].gameObject.transform.position = new Vector2(posPour4ePositionX, posPour4ePositionY);
     }
 }
