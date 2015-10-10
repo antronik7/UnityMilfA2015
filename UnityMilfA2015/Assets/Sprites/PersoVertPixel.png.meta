@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 6294c13275213fd4a89ca346d86964a8
-timeCreated: 1444500325
+guid: 36f8bfb5f88ec814babb64a3474a1cc9
+timeCreated: 1444500552
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PersoRougePixel_0
+    21300000: PersoVertPixel_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -31,7 +31,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: 0
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -51,7 +51,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: PersoRougePixel_0
+    - name: PersoVertPixel_0
       rect:
         serializedVersion: 2
         x: 0
