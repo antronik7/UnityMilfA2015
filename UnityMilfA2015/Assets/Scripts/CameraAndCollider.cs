@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraAndCollider : MonoBehaviour
 {
+    private GameObject Mur;
     private bool FinAscension;
     private Camera Cam;
     private GameObject Objet;
@@ -24,9 +25,9 @@ public class CameraAndCollider : MonoBehaviour
     void Awake()
     {
         Cam = GetComponentInParent<Camera>();
-        CameraSpeed = 2f;
         FinAscension = false;
         Menu = ScriptMenu.GetComponent<MainMenu>();
+        Mur = (GameObject)Resources.Load("Wall");
 
         if(Cam.orthographic)
         {
@@ -46,6 +47,9 @@ public class CameraAndCollider : MonoBehaviour
             if (Cam.transform.position.y < HauteurMax + 15 && FinAscension)
                 Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
         }
+
+        if (Cam.transform.position.y % 110 < 100.2 && Cam.transform.position.y % 110 > 100.12)
+            Instantiate(Mur).transform.Translate(0, Cam.transform.position.y + 6, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other)
