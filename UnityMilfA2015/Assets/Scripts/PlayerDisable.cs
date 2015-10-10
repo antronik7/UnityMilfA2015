@@ -3,10 +3,11 @@ using System.Collections;
 
 public class PlayerDisable : MonoBehaviour {
 
+    private SpriteFlash Script;
     public float waitSeconds = 1;
 	// Use this for initialization
 	void Start () {
-	
+        Script = GetComponent<SpriteFlash>();
 	}
 	
 	// Update is called once per frame
@@ -21,6 +22,7 @@ public class PlayerDisable : MonoBehaviour {
 
     IEnumerator DisableScripts()
     {
+        Script.StartFlashing();
         transform.GetComponent<PlayerController>().enabled = false;
         transform.GetComponent<PlayerShoot>().enabled = false;
 

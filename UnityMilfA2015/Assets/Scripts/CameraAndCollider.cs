@@ -17,7 +17,7 @@ public class CameraAndCollider : MonoBehaviour
     void Awake()
     {
         Cam = GetComponentInParent<Camera>();
-        CameraSpeed = 3.3f;
+        CameraSpeed = 1f;
         FinAscension = false;
         Menu = ScriptMenu.GetComponent<MainMenu>();
     }
@@ -30,19 +30,20 @@ public class CameraAndCollider : MonoBehaviour
                 Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
             else
                 FinAscension = true;
+
             if (Cam.transform.position.y < HauteurMax + 15 && FinAscension)
                 Cam.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(other.gameObject);
 
-        if(other.transform.localScale.x > 2 && !FinAscension)
+        if(other.transform.localScale.x < -3 && !FinAscension)
         {
             ObjetInstancie = Instantiate(Plateforme);
-            ObjetInstancie.transform.Translate(Random.Range(-10, 10), Cam.transform.position.y + 8, 0);
+            ObjetInstancie.transform.Translate(Random.Range(-10, 10), Cam.transform.position.y + 5, 0);
 
             if (Random.Range(0, 4) == 1)
                 Instantiate(Pixel).transform.position = ObjetInstancie.transform.position + (Vector3.up * 0.5f);

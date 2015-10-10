@@ -76,6 +76,9 @@ public class PlayerController : MonoBehaviour {
                 changeAirPosition = true;
             }
         }
+
+        if(transform.position.y < -10)
+            transform.Translate(0,30,0);
     }
 
     // Update is called once per frame
