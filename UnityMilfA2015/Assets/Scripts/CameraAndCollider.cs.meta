@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 0adff52468ec567499ec07148d1a6c61
-timeCreated: 1444427876
+timeCreated: 1444457140
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ScriptMenu: {instanceID: 0}
+  - Pixel: {fileID: 168722, guid: 8c52452d69a8f564c8c1bd8a195e1703, type: 2}
+  - Plateforme: {fileID: 168776, guid: 68f05db81c34c8e41b6e31a880321e36, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

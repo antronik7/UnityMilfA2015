@@ -20,11 +20,11 @@ public class PlayerShoot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+
 
         //Debug.Log(move);
 
-        if (Time.time >= timestamp && Input.GetButtonDown(fireButton))
+        if (Time.time >= timestamp && Input.GetButtonDown(fireButton) && munition >= 1)
         {
             float move = Input.GetAxis(vertiAxis);
 

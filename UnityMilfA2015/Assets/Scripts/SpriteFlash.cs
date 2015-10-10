@@ -8,6 +8,10 @@ public class SpriteFlash : MonoBehaviour
 	void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
+    }
+
+    public void StartFlashing()
+    {
         StartCoroutine(MaCoroutine());
     }
 
@@ -16,9 +20,9 @@ public class SpriteFlash : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             Sprite.enabled = false;
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
             Sprite.enabled = true;
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }
