@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public float CameraSpeed = 3.3f;
     public bool faireMouvementCam = false;
-    public float maxMonterCam = 5f;
+    public float maxMonterCam = 6f;
 
     public bool faireMouvementBtnJoueur = false;
     public float MenuSpeed = 0.1f;
@@ -35,10 +35,17 @@ public class MainMenu : MonoBehaviour
     public GameObject iconePlayer3;
     public GameObject iconePlayer4;
 
+    private AudioSource Source;
+    public AudioClip VoixDebut;
+    public AudioClip VoixDebut2;
+    public AudioClip VoixDebut3;
+    public AudioClip Musique;
+
 
     void Awake()
     {
         CommencerJeu = false;
+        Source = GetComponent<AudioSource>();
     }
 
     //Fonction update du menu. En se moment on s'en sert juste pour faire le mouvement de la cam
@@ -167,8 +174,6 @@ public class MainMenu : MonoBehaviour
     //Fonctoin qui load la prochaine Scene
     public void loadGame()
     {
-        CommencerJeu = true;
-
         //Activer les joueurs
         player1.SetActive(true);
         player2.SetActive(true);
@@ -188,6 +193,7 @@ public class MainMenu : MonoBehaviour
                 break;
         }
 
+        StartCoroutine(MaCoroutine());
     }
 
     //Fonction qui reinitialise les controles des joueurs
@@ -236,13 +242,13 @@ public class MainMenu : MonoBehaviour
             player1.GetComponent<PlayerShoot>().initialiserMesControle(1);
             player1.GetComponent<PlayerShoot>().initialiserAngle(0);
 
-            switch (nbrJoueur)
+            switch (nbrJoueur - 1)
             {
                 case 1:
                     PlayerPrefs.SetString("2Horizontal", "1HorizontalManette");
                     PlayerPrefs.SetString("2Vertical", "1VerticalManette");
                     PlayerPrefs.SetString("2Fire", "1FireManette");
-                    PlayerPrefs.SetString("1Jump", "1JumpManette");
+                    PlayerPrefs.SetString("2Jump", "1JumpManette");
 
                     player2.GetComponent<PlayerController>().initialiserMesControle(2);
                     player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
@@ -298,7 +304,7 @@ public class MainMenu : MonoBehaviour
             //Mettre controle 
             PlayerPrefs.SetString("1Horizontal", "1HorizontalManette");
             PlayerPrefs.SetString("1Vertical", "1VerticalManette");
-            PlayerPrefs.SetString("1Fire", "1Fire1");
+            PlayerPrefs.SetString("1Fire", "1FireManette");
             PlayerPrefs.SetString("1Jump", "1JumpManette");
 
             player1.GetComponent<PlayerController>().initialiserMesControle(1);
@@ -306,17 +312,17 @@ public class MainMenu : MonoBehaviour
             player1.GetComponent<PlayerShoot>().initialiserAngle(1);
 
 
-            switch (nbrJoueur)
+            switch (nbrJoueur - 1)
             {
                 case 1:
                     PlayerPrefs.SetString("2Horizontal", "2HorizontalManette");
                     PlayerPrefs.SetString("2Vertical", "2VerticalManette");
                     PlayerPrefs.SetString("2Fire", "2FireManette");
                     PlayerPrefs.SetString("2Jump", "2JumpManette");
-                    break;
-
+ 
                     player2.GetComponent<PlayerController>().initialiserMesControle(2);
                     player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
+                    break;
 
                 case 2:
 
@@ -380,5 +386,30 @@ public class MainMenu : MonoBehaviour
         btnTroisPlayer.SetActive(true);
         btnQuatrePlayer.SetActive(true);
         initialiserControle();
+    }
+
+    IEnumerator MaCoroutine()
+    {
+        Source.clip = VoixDebut;
+        Source.Play();
+
+        yield return new WaitForSeconds(8f);
+
+        Source.clip = VoixDebut2;
+        Source.Play();
+
+        yield return new WaitForSeconds(2f);
+
+        Source.clip = VoixDebut3;
+        Source.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        Source.clip = Musique;
+        Source.Play();
+        Source.volume = 0.2f;
+        Source.loop = true;
+
+        CommencerJeu = true;
     }
 }

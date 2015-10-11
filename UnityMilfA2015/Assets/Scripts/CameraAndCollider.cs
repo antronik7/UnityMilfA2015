@@ -11,7 +11,8 @@ public class CameraAndCollider : MonoBehaviour
     private MainMenu Menu;
     private GameObject Plateforme;
     private GameObject Pixel;
-    
+    private GameObject Spike;
+    private GameObject SpikeInst;
     public GameObject ObjetP;
     public GameObject ScriptMenu;
     public float CameraSpeed;
@@ -30,6 +31,7 @@ public class CameraAndCollider : MonoBehaviour
         FinAscension = false;
         Menu = ScriptMenu.GetComponent<MainMenu>();
         Mur = (GameObject)Resources.Load("Wall");
+        Spike = (GameObject)Resources.Load("Spikes");
 
         if(Cam.orthographic)
             Scale = Screen.height / NativeResolution.y;
@@ -50,6 +52,7 @@ public class CameraAndCollider : MonoBehaviour
 
         if (Cam.transform.position.y % 110 < 100.2 && Cam.transform.position.y % 110 > 100.12)
             Instantiate(Mur).transform.Translate(0, Cam.transform.position.y + 6, 0);
+
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -101,13 +104,13 @@ public class CameraAndCollider : MonoBehaviour
             }
 
             Objet = Instantiate(Plateforme);
+            Objet2 = Objet;
             NombreEtage++;
-            Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 4, ObjetP.transform.position.x + 4), NombreEtage * 1.5f, 0);
+            Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 3, ObjetP.transform.position.x + 3), NombreEtage * 1.5f, 0);
 
             //  On translate la nouvelle plateforme à une distance de moins de 5 unités de la dernière et à 8.64 units au dessus de la caméra
             if (Random.Range(0, 5) <= 3)
             {
-                GameObject Objet2;
                 Objet2 = Instantiate(Plateforme);
 
                 Objet2.transform.Translate(Random.Range(ObjetP.transform.position.x - 5, ObjetP.transform.position.x + 5), NombreEtage * 1.5f, 0);
@@ -121,6 +124,17 @@ public class CameraAndCollider : MonoBehaviour
                     Objet2.transform.Translate(Random.Range(4, 8), 0, 0);
             }
 
+            if(Random.Range(0, 5) <= 2)
+            {
+                SpikeInst = Instantiate(Spike);
+                SpikeInst.transform.Translate(Random.Range(-10, 10), NombreEtage * 1.5f, 0);
+
+                if(Vector2.Distance(SpikeInst.transform.position, Objet.transform.position) < 3 || Vector2.Distance(SpikeInst.transform.position, Objet2.transform.position) < 3)
+                {
+                    SpikeInst.transform.Translate(0, (NombreEtage + 30) * 1.5f, 0);
+                }
+            }
+
             //  Si en dehors de l'écran vers la droite, translate vers la gauche
             if (Objet.transform.position.x > 9)
                 Objet.transform.Translate(Random.Range(-15, -10), 0, 0);
@@ -130,7 +144,7 @@ public class CameraAndCollider : MonoBehaviour
                 Objet.transform.Translate(Random.Range(10, 15), 0, 0);
             
             //  1 chance sur 5 d'instancier un Pixel
-            if (Random.Range(0, 5) >= 4)
+            if (Random.Range(0, 5) >= 3)
                 Instantiate(Pixel).transform.position = Objet.transform.position + (Vector3.up * 0.5f);
             
             //  On garde en mémoire la dernière plateforme instanciée
