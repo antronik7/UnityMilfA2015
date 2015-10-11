@@ -56,8 +56,8 @@ public class CameraAndCollider : MonoBehaviour
     {
         if (other.gameObject.name != "Player1" && other.gameObject.name != "Player2" && other.gameObject.name != "Player3" && other.gameObject.name != "Player4")
             Destroy(other.gameObject);
-        
-        if(other.transform.localScale.y < 0.5 && !FinAscension)
+
+        if (other.transform.localScale.y == 0.25f || (other.transform.localScale.y < 2.1f && other.transform.localScale.y > 1.9f) && !FinAscension)
         {
             switch(Random.Range(0,12))
             {

@@ -10,9 +10,9 @@ public class PlayerShoot : MonoBehaviour {
     public int munitionPrecedente;
     public int changerAtari;
     public int changerNes = 60;
-    public GameObject spritePixel;
-    public GameObject spriteAtari;
-    public GameObject spriteNes;
+    //public GameObject spritePixel;
+    //public GameObject spriteAtari;
+    //public GameObject spriteNes;
 
     public float timeBetweenShots = 0.3333f;  // Allow 3 shots per second
     public AudioClip shootSound;
@@ -44,9 +44,9 @@ public class PlayerShoot : MonoBehaviour {
             }
                 
             //GetComponentsInChildren<PlayerController>();
-            spritePixel.SetActive(true);
+            /*spritePixel.SetActive(true);
             spriteAtari.SetActive(false);
-            spriteNes.SetActive(false);
+            spriteNes.SetActive(false);*/
         }
         else if (munition >= changerAtari)
         {
@@ -55,23 +55,23 @@ public class PlayerShoot : MonoBehaviour {
                 GetComponent<PlayerController>().StartLoading();
                 nivSprite = 1;
 
-                spritePixel.SetActive(false);
+                /*spritePixel.SetActive(false);
                 spriteAtari.SetActive(true);
-                spriteNes.SetActive(false);
+                spriteNes.SetActive(false);*/
             }
             else if(nivSprite < 2)
             {
                 GetComponent<PlayerController>().StartLoading();
                 nivSprite = 1;
 
-                spritePixel.SetActive(false);
+                /*spritePixel.SetActive(false);
                 spriteAtari.SetActive(true);
-                spriteNes.SetActive(false);
+                spriteNes.SetActive(false);*/
             }
 
-            spritePixel.SetActive(false);
+            /*spritePixel.SetActive(false);
             spriteAtari.SetActive(true);
-            spriteNes.SetActive(false);
+            spriteNes.SetActive(false);*/
         }
 
         else if (munition >= changerNes)
@@ -82,8 +82,8 @@ public class PlayerShoot : MonoBehaviour {
                 nivSprite = 2;
             }
 
-            spritePixel.SetActive(false);
-            spriteAtari.SetActive(true);
+            /*spritePixel.SetActive(false);
+            spriteAtari.SetActive(true);*/
         }
 
 

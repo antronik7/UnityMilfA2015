@@ -31,6 +31,11 @@ public class MenuPosition : MonoBehaviour {
 
     public bool finiTrier = false;
 
+    public GUIStyle guiStyle;
+
+    public int modifierPositionXAmmo;
+    public int modifierPositionYAmmo;
+
 	//Ce update sert a trier les positions des joueurs selon le nombre de Ammo
 	void Update () 
     {
@@ -81,6 +86,17 @@ public class MenuPosition : MonoBehaviour {
 
         joueursPosition[0].gameObject.transform.localPosition = new Vector3(posPour1erPositionX, posPour1erPositionY, 10);
         joueursPosition[1].gameObject.transform.localPosition = new Vector3(posPour2ePositionX, posPour2ePositionY, 10);
+
+        //Pour afficher les ammo des position
+        for (int i = 0; i < ammo.Length; i++ )
+        {
+            Vector3 getPixelPos = Camera.main.WorldToScreenPoint(joueursPosition[i].gameObject.transform.position);
+            getPixelPos.y = Screen.height - getPixelPos.y;
+
+            GUI.Label(new Rect((getPixelPos.x - (modifierPositionXAmmo * joueursPosition[i].gameObject.transform.localScale.x)), getPixelPos.y - (modifierPositionYAmmo * joueursPosition[i].gameObject.transform.localScale.y), 100f, 100f), ammo[i].ToString(), guiStyle);
+
+        }
+       
     }
 
     public void trierPour3Joueur()
