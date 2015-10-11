@@ -7,14 +7,13 @@ public class BallController : MonoBehaviour {
     public Sprite[] lesBits;
 	// Use this for initialization
 	void Start () {
-
-        if (Random.Range(0, 1) > 0.5)
+        if (Random.Range(0, 2) == 0)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = lesBits[0];
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = lesBits[0];
+            gameObject.GetComponent<SpriteRenderer>().sprite = lesBits[1];
         }
             
 	}
