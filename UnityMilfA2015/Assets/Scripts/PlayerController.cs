@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     public AudioClip jumpSound;
     public GameObject spriteAtari;
     public GameObject spawner;
+    private GameObject animationLoading;
 
     private Animator[] animators;
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         animators = GetComponentsInChildren<Animator>();
+        animationLoading = GameObject.Find("loading");
     }
 
     // Use this for initialization
@@ -118,14 +120,6 @@ public class PlayerController : MonoBehaviour {
             AudioSource.PlayClipAtPoint(jumpSound, transform.position, 1f);
         }
 
-        if(Input.GetButtonDown(fireButton))
-        {
-            foreach (Animator animator in animators)
-            {
-                animator.SetInteger("AnimState", 2);
-            }
-        }
-
         if(Gagner)
         {
             Application.LoadLevel(NomSceneWin);
@@ -138,6 +132,9 @@ public class PlayerController : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+        Vector3 childScale = animationLoading.transform.localScale;
+        childScale.x *= -1;
+        animationLoading.transform.localScale = childScale;
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -164,7 +161,12 @@ public class PlayerController : MonoBehaviour {
 
     void Hurt(Transform objetHurt)
     {
-        if(objetHurt.position.x > transform.position.x)
+        foreach (Animator animator in animators)
+        {
+            animator.SetInteger("AnimState", 5);
+        }
+
+        if (objetHurt.position.x > transform.position.x)
         {
             Vector2 maForce = new Vector2(-forceHurtX, 0);
             rb2D.AddForce(maForce, ForceMode2D.Force);
@@ -175,7 +177,7 @@ public class PlayerController : MonoBehaviour {
             rb2D.AddForce(maForce, ForceMode2D.Force);
         }
 
-        GetComponent<PlayerShoot>().munition -= 10;
+        GetComponent<PlayerShoot>().munition -= 5;
         GetComponent<PlayerDisable>().DisablePlayer();
 
         StartCoroutine(disablePlayerHurt());
@@ -190,5 +192,10 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         disableHurt = false;
+    }
+
+    public void StartLoading()
+    {
+        animationLoading.GetComponent<Animator>().SetTrigger("TriggerLoaging");
     }
 }

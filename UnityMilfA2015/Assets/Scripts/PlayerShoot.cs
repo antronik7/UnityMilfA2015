@@ -9,39 +9,83 @@ public class PlayerShoot : MonoBehaviour {
     public int munition = 20;
     public int munitionPrecedente;
     public int changerAtari;
+    public int changerNes = 60;
     public GameObject spritePixel;
     public GameObject spriteAtari;
+    public GameObject spriteNes;
 
     public float timeBetweenShots = 0.3333f;  // Allow 3 shots per second
     public AudioClip shootSound;
 
     private SpriteRenderer[] sprites;
     private float timestamp;
+    private int nivSprite = 0;
+    private Animator[] animators;
 
     // Use this for initialization
     void Start () {
         munitionPrecedente = munition;
         sprites = GetComponentsInChildren<SpriteRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Awake()
+    {
+        animators = GetComponentsInChildren<Animator>();
+    }
 
-        if(munitionPrecedente != munition)
+    // Update is called once per frame
+    void Update () {
+
+        if(munition < changerAtari)
         {
-            if(munition < changerAtari)
+            if (nivSprite > 0)
             {
-                //Play Animation
-                spritePixel.SetActive(true);
-                spriteAtari.SetActive(false);
+                GetComponent<PlayerController>().StartLoading();
+                nivSprite = 0;
             }
-            else if (munition >= changerAtari)
+                
+            //GetComponentsInChildren<PlayerController>();
+            spritePixel.SetActive(true);
+            spriteAtari.SetActive(false);
+            spriteNes.SetActive(false);
+        }
+        else if (munition >= changerAtari)
+        {
+            if (nivSprite < 1)
             {
-                //Play Animation
+                GetComponent<PlayerController>().StartLoading();
+                nivSprite = 1;
+
                 spritePixel.SetActive(false);
                 spriteAtari.SetActive(true);
+                spriteNes.SetActive(false);
             }
+            else if(nivSprite < 2)
+            {
+                GetComponent<PlayerController>().StartLoading();
+                nivSprite = 1;
+
+                spritePixel.SetActive(false);
+                spriteAtari.SetActive(true);
+                spriteNes.SetActive(false);
+            }
+
+            spritePixel.SetActive(false);
+            spriteAtari.SetActive(true);
+            spriteNes.SetActive(false);
         }
+
+        else if (munition >= changerNes)
+        {
+            if (nivSprite < 2)
+            {
+                GetComponent<PlayerController>().StartLoading();
+                nivSprite = 2;
+            }
+
+            spritePixel.SetActive(false);
+            spriteAtari.SetActive(true);
+        }
+
 
         if (Time.time >= timestamp && Input.GetButtonDown(fireButton) && munition >= 1)
         {
@@ -56,18 +100,38 @@ public class PlayerShoot : MonoBehaviour {
             if (move > 0.45)
             {
                 dirY = 1;
+
+                foreach (Animator animator in animators)
+                {
+                    animator.SetInteger("AnimState", 3);
+                }
             }
             else if (move < -0.45)
             {
                 dirY = -1;
+
+                foreach (Animator animator in animators)
+                {
+                    animator.SetInteger("AnimState", 4);
+                }
             }
             else if (transform.localScale.x > 0)
             {
                 dirX = 1;
+
+                foreach (Animator animator in animators)
+                {
+                    animator.SetInteger("AnimState", 2);
+                }
             }
             else if (transform.localScale.x < 0)
             {
                 dirX = -1;
+
+                foreach (Animator animator in animators)
+                {
+                    animator.SetInteger("AnimState", 2);
+                }
             }
 
             ball.GetComponent<BallController>().Initialize(dirX, dirY);
@@ -85,6 +149,6 @@ public class PlayerShoot : MonoBehaviour {
             GetComponent<PlayerController>().Gagner = true;
         }
 
-        munitionPrecedente = munition;
+        
     }
 }
