@@ -17,6 +17,8 @@ public class PlayerShoot : MonoBehaviour {
     public GameObject spriteNes;
     public GameObject spriteSnes;
 
+    public float angle = 0.45f;
+
     public float timeBetweenShots = 0.3333f;  // Allow 3 shots per second
     public AudioClip shootSound;
 
@@ -144,7 +146,7 @@ public class PlayerShoot : MonoBehaviour {
             int dirX = 0;
             int dirY = 0;
 
-            if (move > 0.45)
+            if (move > angle)
             {
                 dirY = 1;
 
@@ -164,7 +166,7 @@ public class PlayerShoot : MonoBehaviour {
                 }
 
             }
-            else if (move < -0.45)
+            else if (move < -angle)
             {
                 dirY = -1;
 
@@ -241,5 +243,52 @@ public class PlayerShoot : MonoBehaviour {
         }
 
         
+    }
+
+    public void initialiserMesControle(int numJoueur)
+    {
+
+            /*public string fireButton = "Fire1";
+            public string vertiAxis = "Vertical";*/
+        switch (numJoueur)
+        {
+            //Joueur 1
+            case 1:
+                vertiAxis = PlayerPrefs.GetString("1Vertical");
+                fireButton = PlayerPrefs.GetString("1Fire");
+                break;
+            
+            //Joueur 2
+            case 2:
+                vertiAxis = PlayerPrefs.GetString("2Vertical");
+                fireButton = PlayerPrefs.GetString("2Fire");
+                break;
+            
+            //Joueur 3
+            case 3:
+                vertiAxis = PlayerPrefs.GetString("3Vertical");
+                fireButton = PlayerPrefs.GetString("3Fire");
+                break;
+            
+            //Joueur 4
+            case 4:
+                vertiAxis = PlayerPrefs.GetString("4Vertical");
+                fireButton = PlayerPrefs.GetString("4Fire");
+                break;
+        }
+    }
+
+    public void initialiserAngle(int controleur)
+    {
+        //Si le premier joueur a une manette
+        if (controleur == 1)
+        {
+            angle = 0.45f;
+        }
+        //Si le joueur a un clavier
+        else
+        {
+            angle = 0;
+        }
     }
 }
