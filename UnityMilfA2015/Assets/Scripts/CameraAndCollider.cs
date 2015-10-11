@@ -105,7 +105,7 @@ public class CameraAndCollider : MonoBehaviour
             Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 4, ObjetP.transform.position.x + 4), NombreEtage * 1.5f, 0);
 
             //  On translate la nouvelle plateforme à une distance de moins de 5 unités de la dernière et à 8.64 units au dessus de la caméra
-            if (Random.Range(0, 5) >= 3)
+            if (Random.Range(0, 5) <= 3)
             {
                 GameObject Objet2;
                 Objet2 = Instantiate(Plateforme);
