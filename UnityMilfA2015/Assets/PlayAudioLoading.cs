@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayAudioLoading : MonoBehaviour {
 
+    public AudioClip sonConstruction;
 	// Use this for initialization
 	void Start () {
 	
@@ -15,6 +16,6 @@ public class PlayAudioLoading : MonoBehaviour {
 
     public void afterAnimationLoading()
     {
-
+        AudioSource.PlayClipAtPoint(sonConstruction, transform.position, 1f);
     }
 }

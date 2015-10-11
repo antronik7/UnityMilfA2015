@@ -21,9 +21,14 @@ public class PlayerController : MonoBehaviour {
     public bool disableMovement = false;
     public string NomSceneWin = "Win1";
     public AudioClip jumpSound;
+    public AudioClip hurtSound;
     public GameObject spriteAtari;
     public GameObject spawner;
     private GameObject animationLoading;
+    private GameObject animatorATrouver;
+    public GameObject Atari;
+    public GameObject Nes;
+    public GameObject Snes;
 
     private Animator[] animators;
 
@@ -31,13 +36,12 @@ public class PlayerController : MonoBehaviour {
     void Awake()
     {
         animators = GetComponentsInChildren<Animator>();
-        animationLoading = GameObject.Find("loading");
+        animationLoading = transform.Find("loading").gameObject;
     }
 
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
-        spriteAtari.SetActive(false);
     }
 
     void FixedUpdate()
@@ -55,19 +59,51 @@ public class PlayerController : MonoBehaviour {
 
         if(move != 0 && standing)
         {
-            foreach (Animator animator in animators)
+            if (Atari.GetComponent<Animator>().enabled)
+            {
+                Atari.GetComponent<Animator>().SetInteger("AnimState", 1);
+            }
+
+            if (Nes.GetComponent<Animator>().enabled)
+            {
+                Nes.GetComponent<Animator>().SetInteger("AnimState", 1);
+            }
+
+            if (Snes.GetComponent<Animator>().enabled)
+            {
+                Snes.GetComponent<Animator>().SetInteger("AnimState", 1);
+            }
+
+            /*foreach (Animator animator in animators)
             {
                 animator.SetInteger("AnimState", 1);
-            }
+            }*/
         }
         else
         {
-            foreach (Animator animator in animators)
+            if (Atari.GetComponent<Animator>().enabled)
             {
-                animator.SetInteger("AnimState", 0);
+                Atari.GetComponent<Animator>().SetInteger("AnimState", 0);
             }
+
+            if (Nes.GetComponent<Animator>().enabled)
+            {
+                Nes.GetComponent<Animator>().SetInteger("AnimState", 0);
+            }
+
+            if (Snes.GetComponent<Animator>().enabled)
+            {
+                Snes.GetComponent<Animator>().SetInteger("AnimState", 0);
+            }
+
+            /*foreach (Animator animator in animators)
+            {
+                if(animator.transform.gameObject.e)
+                {
+                    animator.SetInteger("AnimState", 0);
+                }
+            }*/
         }
-        
 
         if (move > 0 && !facingRight)
         {
@@ -88,41 +124,111 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if(transform.position.y < -10)
+        if(transform.position.y < Camera.main.transform.position.y - 10)
         {
             transform.position = spawner.transform.position;
             Vector2 maForce = new Vector2(0, spawnForce);
             rb2D.velocity = Vector2.zero;
             rb2D.AddForce(maForce, ForceMode2D.Force);
-            GetComponent<SpriteFlash>().StartFlashing();
-            StartCoroutine(disablePlayerHurt());
+            Hurt();
         }
 
-    }
-
-    // Update is called once per frame
-    void Update () {
         var absVelY = Mathf.Abs(rb2D.velocity.y);
 
         if (absVelY < 0.0001f)
         {
             standing = true;
             changeAirPosition = false;
+
+            if (Atari.GetComponent<Animator>().enabled)
+            {
+                Atari.GetComponent<Animator>().SetBool("AnimStanding", true);
+            }
+
+            if (Nes.GetComponent<Animator>().enabled)
+            {
+                Nes.GetComponent<Animator>().SetBool("AnimStanding", true);
+            }
+
+            if (Snes.GetComponent<Animator>().enabled)
+            {
+                Snes.GetComponent<Animator>().SetBool("AnimStanding", true);
+            }
+
+            /*foreach (Animator animator in animators)
+            {
+                animator.SetBool("AnimStanding", true);
+            }*/
         }
         else
         {
             standing = false;
         }
 
+        if (absVelY > 0.5f )
+        {
+            if (Atari.GetComponent<Animator>().enabled)
+            {
+                Atari.GetComponent<Animator>().SetInteger("AnimState", 7);
+                Atari.GetComponent<Animator>().SetBool("AnimStanding", false);
+            }
+
+            if (Nes.GetComponent<Animator>().enabled)
+            {
+                Nes.GetComponent<Animator>().SetInteger("AnimState", 7);
+                Nes.GetComponent<Animator>().SetBool("AnimStanding", false);
+            }
+
+            if (Snes.GetComponent<Animator>().enabled)
+            {
+                Snes.GetComponent<Animator>().SetInteger("AnimState", 7);
+                Snes.GetComponent<Animator>().SetBool("AnimStanding", false);
+            }
+
+            /*foreach (Animator animator in animators)
+            {
+                animator.SetInteger("AnimState", 7);
+                animator.SetBool("AnimStanding", false);
+            }*/
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (standing && Input.GetButtonDown(jumpBouton))
         {
             rb2D.AddForce(new Vector2(0, jumpForce));
             AudioSource.PlayClipAtPoint(jumpSound, transform.position, 1f);
+
+            
         }
 
         if(Gagner)
         {
             Application.LoadLevel(NomSceneWin);
+        }
+
+        if(standing)
+        {
+            if (Atari.GetComponent<Animator>().enabled)
+            {
+                Atari.GetComponent<Animator>().SetBool("AnimStanding", true);
+            }
+
+            if (Nes.GetComponent<Animator>().enabled)
+            {
+                Nes.GetComponent<Animator>().SetBool("AnimStanding", true);
+            }
+
+            if (Snes.GetComponent<Animator>().enabled)
+            {
+                Snes.GetComponent<Animator>().SetBool("AnimStanding", true);
+            }
+
+            /*foreach (Animator animator in animators)
+            {
+                animator.SetBool("AnimStanding", true);
+            }*/
         }
     }
 
@@ -161,6 +267,8 @@ public class PlayerController : MonoBehaviour {
 
     void Hurt(Transform objetHurt)
     {
+        AudioSource.PlayClipAtPoint(hurtSound, transform.position, 10f);
+
         foreach (Animator animator in animators)
         {
             animator.SetInteger("AnimState", 5);
@@ -180,6 +288,16 @@ public class PlayerController : MonoBehaviour {
         GetComponent<PlayerShoot>().munition -= 5;
         GetComponent<PlayerDisable>().DisablePlayer();
 
+        StartCoroutine(disablePlayerHurt());
+    }
+
+    void Hurt()
+    {
+        AudioSource.PlayClipAtPoint(hurtSound, transform.position, 10f);
+
+        GetComponent<PlayerShoot>().munition -= 5;
+
+        GetComponent<SpriteFlash>().StartFlashing();
         StartCoroutine(disablePlayerHurt());
     }
 
