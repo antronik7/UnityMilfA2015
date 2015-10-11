@@ -54,7 +54,8 @@ public class CameraAndCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject);
+        if (other.gameObject.name != "Player1" && other.gameObject.name != "Player2" && other.gameObject.name != "Player3" && other.gameObject.name != "Player4")
+            Destroy(other.gameObject);
         
         if(other.transform.localScale.y < 0.5 && !FinAscension)
         {
