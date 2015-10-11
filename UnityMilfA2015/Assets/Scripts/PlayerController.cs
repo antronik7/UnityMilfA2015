@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if(disableMovement)
+        {
+            return;
+        }
+
         float move = Input.GetAxis(HoriAxis);
 
         if (!standing && changeAirPosition)
@@ -195,6 +200,12 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        if(disableMovement)
+        {
+            return;
+        }
+
         if (standing && Input.GetButtonDown(jumpBouton))
         {
             rb2D.AddForce(new Vector2(0, jumpForce));
@@ -265,8 +276,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Hurt(Transform objetHurt)
+    public void Hurt(Transform objetHurt)
     {
+        if (disableHurt)
+        {
+            return;
+        }
+
         AudioSource.PlayClipAtPoint(hurtSound, transform.position, 10f);
 
         foreach (Animator animator in animators)

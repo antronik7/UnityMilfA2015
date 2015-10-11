@@ -16,6 +16,7 @@ public class PlayerShoot : MonoBehaviour {
     public GameObject spriteAtari;
     public GameObject spriteNes;
     public GameObject spriteSnes;
+    public bool disableMovement = false;
 
     public float angle = 0.45f;
 
@@ -32,6 +33,20 @@ public class PlayerShoot : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
+        if (munition < 0)
+        {
+            munition = 0;
+        }
+        else if (munition >= munitionVictoire)
+        {
+            GetComponent<PlayerController>().Gagner = true;
+        }
+
+        if(disableMovement)
+        {
+            return;
+        }
 
         if(munition < changerAtari)
         {
@@ -231,18 +246,7 @@ public class PlayerShoot : MonoBehaviour {
             timestamp = Time.time + timeBetweenShots;
 
             munition--;
-        }
-
-        if(munition < 0)
-        {
-            munition = 0;
-        }
-        else if (munition >= munitionVictoire)
-        {
-            GetComponent<PlayerController>().Gagner = true;
-        }
-
-        
+        }  
     }
 
     public void initialiserMesControle(int numJoueur)
