@@ -23,6 +23,8 @@ public class MainMenu : MonoBehaviour
     public bool faireMouvementBtnJoueur = false;
     public float MenuSpeed = 0.1f;
 
+    public GameObject ImageTitle;
+
     void Awake()
     {
         CommencerJeu = false;
@@ -289,11 +291,13 @@ public class MainMenu : MonoBehaviour
 
         maxMonterCam = maxMonterCam*2;
         faireMouvementCam = true;
+        ImageTitle.SetActive(false);
         loadGame();
     }
 
     public void initialiserMenu()
     {
+        ImageTitle.SetActive(true);
         btnDeuxPlayer.SetActive(true);
         btnTroisPlayer.SetActive(true);
         btnQuatrePlayer.SetActive(true);
