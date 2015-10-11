@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         //si sa plante remettre sa en bas
-        if (transform.position.y < Camera.main.transform.position.y - 10)
+        if (transform.position.y < Camera.main.transform.position.y - 8)
         {
             transform.position = spawner.transform.position;
             Vector2 maForce = new Vector2(0, spawnForce);
