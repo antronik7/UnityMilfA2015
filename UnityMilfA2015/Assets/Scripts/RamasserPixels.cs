@@ -7,7 +7,7 @@ public class RamasserPixels : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.name != "Collider" && other.name != "Pixel(Clone)" && other.name != "Ball1(Clone)")
+        if (other.name.Substring(0, 6) == "Player")
         {
             Script = other.GetComponent<PlayerShoot>();
             Script.munition += 10;
