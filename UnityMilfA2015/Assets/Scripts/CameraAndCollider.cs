@@ -104,13 +104,13 @@ public class CameraAndCollider : MonoBehaviour
             }
 
             Objet = Instantiate(Plateforme);
+            Objet2 = Objet;
             NombreEtage++;
             Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 3, ObjetP.transform.position.x + 3), NombreEtage * 1.5f, 0);
 
             //  On translate la nouvelle plateforme à une distance de moins de 5 unités de la dernière et à 8.64 units au dessus de la caméra
             if (Random.Range(0, 5) <= 3)
             {
-                GameObject Objet2;
                 Objet2 = Instantiate(Plateforme);
 
                 Objet2.transform.Translate(Random.Range(ObjetP.transform.position.x - 5, ObjetP.transform.position.x + 5), NombreEtage * 1.5f, 0);
@@ -124,7 +124,7 @@ public class CameraAndCollider : MonoBehaviour
                     Objet2.transform.Translate(Random.Range(4, 8), 0, 0);
             }
 
-            if(Random.Range(0, 5) <= 1)
+            if(Random.Range(0, 5) <= 2)
             {
                 SpikeInst = Instantiate(Spike);
                 SpikeInst.transform.Translate(Random.Range(-10, 10), NombreEtage * 1.5f, 0);

@@ -236,13 +236,13 @@ public class MainMenu : MonoBehaviour
             player1.GetComponent<PlayerShoot>().initialiserMesControle(1);
             player1.GetComponent<PlayerShoot>().initialiserAngle(0);
 
-            switch (nbrJoueur)
+            switch (nbrJoueur - 1)
             {
                 case 1:
                     PlayerPrefs.SetString("2Horizontal", "1HorizontalManette");
                     PlayerPrefs.SetString("2Vertical", "1VerticalManette");
                     PlayerPrefs.SetString("2Fire", "1FireManette");
-                    PlayerPrefs.SetString("1Jump", "1JumpManette");
+                    PlayerPrefs.SetString("2Jump", "1JumpManette");
 
                     player2.GetComponent<PlayerController>().initialiserMesControle(2);
                     player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
@@ -298,7 +298,7 @@ public class MainMenu : MonoBehaviour
             //Mettre controle 
             PlayerPrefs.SetString("1Horizontal", "1HorizontalManette");
             PlayerPrefs.SetString("1Vertical", "1VerticalManette");
-            PlayerPrefs.SetString("1Fire", "1Fire1");
+            PlayerPrefs.SetString("1Fire", "1FireManette");
             PlayerPrefs.SetString("1Jump", "1JumpManette");
 
             player1.GetComponent<PlayerController>().initialiserMesControle(1);
@@ -306,17 +306,17 @@ public class MainMenu : MonoBehaviour
             player1.GetComponent<PlayerShoot>().initialiserAngle(1);
 
 
-            switch (nbrJoueur)
+            switch (nbrJoueur - 1)
             {
                 case 1:
                     PlayerPrefs.SetString("2Horizontal", "2HorizontalManette");
                     PlayerPrefs.SetString("2Vertical", "2VerticalManette");
                     PlayerPrefs.SetString("2Fire", "2FireManette");
                     PlayerPrefs.SetString("2Jump", "2JumpManette");
-                    break;
-
+ 
                     player2.GetComponent<PlayerController>().initialiserMesControle(2);
                     player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
+                    break;
 
                 case 2:
 
