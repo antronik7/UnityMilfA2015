@@ -10,7 +10,14 @@ public class RamasserPixels : MonoBehaviour
         if (other.name.Substring(0, 6) == "Player")
         {
             Script = other.GetComponent<PlayerShoot>();
-            Script.munition += 10;
+
+            if (this.gameObject.name == "Munition1(Clone)")
+                Script.munition++;
+            if (this.gameObject.name == "Munition5(Clone)")
+                Script.munition += 5;
+            if (this.gameObject.name == "Munition10(Clone)")
+                Script.munition += 10;
+
             Destroy(this.gameObject);
         }
     }

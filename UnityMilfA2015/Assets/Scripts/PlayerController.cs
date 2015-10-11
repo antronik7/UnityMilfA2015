@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(disablePlayerHurt());
     }
 
-    void Hurt()
+    public void Hurt()
     {
         AudioSource.PlayClipAtPoint(hurtSound, transform.position, 10f);
 
