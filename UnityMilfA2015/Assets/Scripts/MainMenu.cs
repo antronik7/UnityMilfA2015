@@ -35,6 +35,18 @@ public class MainMenu : MonoBehaviour
     public GameObject iconePlayer3;
     public GameObject iconePlayer4;
 
+    public GameObject P1;
+    public GameObject P2;
+    public GameObject P3;
+    public GameObject P4;
+
+    public GameObject ScoreP1;
+    public GameObject ScoreP2;
+    public GameObject ScoreP3;
+    public GameObject ScoreP4;
+
+    public GameObject RoundsText;
+
     public int scorePlayer1 = 0;
     public int scorePlayer2 = 0;
     public int scorePlayer3 = 0;
@@ -422,10 +434,20 @@ public class MainMenu : MonoBehaviour
         maxMonterCam = maxMonterCam*2;
         faireMouvementCam = true;
         ImageTitle.SetActive(false);
+
         if (dejaJouer)
         {
-           /// DESAFICHER LES SCORES LOLOLOL
+            P1.SetActive(false);
+            P2.SetActive(false);
+            P3.SetActive(false);
+            P4.SetActive(false);
+            ScoreP1.SetActive(false);
+            ScoreP2.SetActive(false);
+            ScoreP3.SetActive(false);
+            ScoreP4.SetActive(false);
+            RoundsText.SetActive(false);
         }
+
         loadGame();
     }
 
@@ -449,7 +471,29 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            ////////////////////////////FAUT FAIRE DES CHOSE
+            P1.SetActive(true);
+            P2.SetActive(true);
+            P3.SetActive(true);
+            P4.SetActive(true);
+
+            UnityEngine.UI.Text text = ScoreP1.GetComponent<UnityEngine.UI.Text>();
+            text.text = "x" + scorePlayer1.ToString();
+
+            text = ScoreP2.GetComponent<UnityEngine.UI.Text>();
+            text.text = "x" + scorePlayer2.ToString();
+
+            text = ScoreP3.GetComponent<UnityEngine.UI.Text>();
+            text.text = "x" + scorePlayer3.ToString();
+
+            text = ScoreP4.GetComponent<UnityEngine.UI.Text>();
+            text.text = "x" + scorePlayer4.ToString();
+
+            ScoreP1.SetActive(true);
+            ScoreP2.SetActive(true);
+            ScoreP3.SetActive(true);
+            ScoreP4.SetActive(true);
+
+            RoundsText.SetActive(true);
         }
 
         btnDeuxPlayer.SetActive(true);
