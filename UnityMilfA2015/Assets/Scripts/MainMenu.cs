@@ -47,6 +47,12 @@ public class MainMenu : MonoBehaviour
     public GameObject ScoreP3;
     public GameObject ScoreP4;
 
+    public GameObject J1Control;
+    public GameObject J1Control2;
+    public GameObject J2Control;
+    public GameObject J3Control;
+    public GameObject J4Control;
+
     public GameObject RoundsText;
 
     public int scorePlayer1 = 0;
@@ -125,8 +131,9 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("nrbJoueur", 2);
         nbrJoueur = 2;
+        J3Control.SetActive(false);
+        J4Control.SetActive(false);
         GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
-
         DetruireBtnNbrJoueur();
 	}
 
@@ -136,9 +143,8 @@ public class MainMenu : MonoBehaviour
 
         PlayerPrefs.SetInt("nrbJoueur", 3);
         nbrJoueur = 3;
+        J4Control.SetActive(false);
         GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
-        
- 
         DetruireBtnNbrJoueur();
     }
 
@@ -156,9 +162,9 @@ public class MainMenu : MonoBehaviour
     //Fonction appler quand on click sur le bouton btnClavier
     public void Clavier()
     {
-
         PlayerPrefs.SetInt("clavier", 1);
         clavier = true;
+        J1Control.SetActive(false);
         MonterCam();
         DetruireBtnControle();
     }
@@ -166,9 +172,9 @@ public class MainMenu : MonoBehaviour
     //Fonction appler quand on click sur le bouton btnClavier
     public void Manette()
     {
-
         PlayerPrefs.SetInt("clavier", 0);
         clavier = false;
+        J1Control2.SetActive(false);
         MonterCam();
         DetruireBtnControle();
     }
@@ -542,6 +548,13 @@ public class MainMenu : MonoBehaviour
         Source.Play();
         Source.volume = 0.1f;
         Source.loop = true;
+
+        J1Control2.SetActive(false);
+        J1Control.SetActive(false);
+        J2Control.SetActive(false);
+        J3Control.SetActive(false);
+        J4Control.SetActive(false);
+
 
         player1.GetComponent<PlayerController>().disableMovement = false;
         player1.GetComponent<PlayerShoot>().disableMovement = false;
