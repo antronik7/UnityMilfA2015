@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float spawnForce = 600f;
     public bool standing;
     public float airSpeedMultiplier = 0.5f;
-    public Rigidbody2D rb2D;
+    private Rigidbody2D rb2D;
     public bool changeAirPosition = false;
     public float forceHurtX = 5f;
     public string HoriAxis = "Horizontal";
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject Atari;
     public GameObject Nes;
     public GameObject Snes;
+    public GameObject hurtFeedBack;
 
     private Animator[] animators;
 
@@ -285,6 +286,7 @@ public class PlayerController : MonoBehaviour {
             rb2D.AddForce(maForce, ForceMode2D.Force);
         }
 
+        Instantiate(hurtFeedBack, transform.position, Quaternion.identity);
         GetComponent<PlayerShoot>().munition -= 5;
         GetComponent<PlayerDisable>().DisablePlayer();
 
