@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
     public bool disableMovement = false;
     public string NomSceneWin = "Win1";
     public AudioClip jumpSound;
-    public GameObject spriteAtari;
-    public GameObject spawner;
+    //public GameObject spriteAtari;
+    //public GameObject spawner;
     private GameObject animationLoading;
 
     private Animator[] animators;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
-        spriteAtari.SetActive(false);
+        //spriteAtari.SetActive(false);
     }
 
     void FixedUpdate()
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 
         if (move > 0 && !facingRight)
         {
-            Flip();
+            //Flip();
 
             if(!standing)
             {
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
         }
         else if (move < 0 && facingRight)
         {
-            Flip();
+            //Flip();
 
             if (!standing)
             {
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 
         if(transform.position.y < -10)
         {
-            transform.position = spawner.transform.position;
+            //transform.position = spawner.transform.position;
             Vector2 maForce = new Vector2(0, spawnForce);
             rb2D.velocity = Vector2.zero;
             rb2D.AddForce(maForce, ForceMode2D.Force);
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Flip()
+    /*void Flip()
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 childScale = animationLoading.transform.localScale;
         childScale.x *= -1;
         animationLoading.transform.localScale = childScale;
-    }
+    }*/
 
     void OnTriggerEnter2D(Collider2D coll)
     {
@@ -196,6 +196,6 @@ public class PlayerController : MonoBehaviour {
 
     public void StartLoading()
     {
-        animationLoading.GetComponent<Animator>().SetTrigger("TriggerLoaging");
+        //animationLoading.GetComponent<Animator>().SetTrigger("TriggerLoaging");
     }
 }
