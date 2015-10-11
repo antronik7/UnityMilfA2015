@@ -245,12 +245,12 @@ public class MainMenu : MonoBehaviour
                     PlayerPrefs.SetString("2Horizontal", "1HorizontalManette");
                     PlayerPrefs.SetString("2Vertical", "1VerticalManette");
                     PlayerPrefs.SetString("2Fire", "1FireManette");
-                    PlayerPrefs.SetString("1Jump", "");
+                    PlayerPrefs.SetString("2Jump", "1JumpManette");
 
                     PlayerPrefs.SetString("3Horizontal", "2HorizontalManette");
                     PlayerPrefs.SetString("3Vertical", "2VerticalManette");
                     PlayerPrefs.SetString("3Fire", "2FireManette");
-                    PlayerPrefs.SetString("1Jump", "2JumpManette");
+                    PlayerPrefs.SetString("3Jump", "2JumpManette");
                     break;
                 
                 case 3: 
