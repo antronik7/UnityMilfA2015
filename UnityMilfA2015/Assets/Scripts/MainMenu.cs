@@ -657,7 +657,7 @@ public class MainMenu : MonoBehaviour
         GameObject clone = Instantiate(rayon, new Vector3(Joueur.transform.position.x, Camera.main.transform.position.y + 8, 0), Quaternion.identity) as GameObject;
         clone.GetComponent<ScriptBeam>().nameGagnant = Nom;
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(5f);
 
         if (Nom == player1.name)
         {

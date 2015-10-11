@@ -7,13 +7,16 @@ public class SpawnDisquettes : MonoBehaviour
     public GameObject Pixel1;
     public GameObject Pixel2;
 
+    private int NbrJoueurs;
+
     public GameObject[] Positions;
 
 	void Start () 
     {
+        NbrJoueurs = Camera.main.GetComponentInChildren<MainMenu>().nbrJoueur;
         int Index = Random.Range(0, Positions.Length);
 
-        switch (Random.Range(0, 45))
+        switch (Random.Range(0, (70 - (10 * NbrJoueurs))))
         {
             case 0:
             case 1:

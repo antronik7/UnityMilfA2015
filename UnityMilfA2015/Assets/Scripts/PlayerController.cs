@@ -221,6 +221,11 @@ public class PlayerController : MonoBehaviour {
         if(Gagner)
         {
             Manager.GetComponent<MainMenu>().faireGagner(gameObject.name);
+            
+            foreach (Animator animator in animators)
+            {
+                animator.SetInteger("AnimState", 69);
+            }
         }
 
         if(standing)
@@ -318,6 +323,7 @@ public class PlayerController : MonoBehaviour {
 
         GetComponent<PlayerShoot>().munition -= 5;
 
+        Instantiate(hurtFeedBack, new Vector2(spawner.transform.position.x, spawner.transform.position.y + 3) , Quaternion.identity);
         GetComponent<SpriteFlash>().StartFlashing();
         StartCoroutine(disablePlayerHurt());
     }
