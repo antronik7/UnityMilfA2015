@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     public GameObject btnClavier;
     public GameObject btnManette;
 
+    
+
     public int nbrJoueur;
     public bool clavier;
 
@@ -57,6 +59,7 @@ public class MainMenu : MonoBehaviour
     public AudioClip VoixDebut2;
     public AudioClip VoixDebut3;
     public AudioClip Musique;
+    public AudioClip VoixFin;
 
     public GameObject forme1;
     public GameObject forme2;
@@ -72,7 +75,11 @@ public class MainMenu : MonoBehaviour
     public GameObject lettreX;
     public GameObject lettreA;
 
+    public GameObject rayon;
+
     public bool dejaJouer = false;
+
+    private bool pasDeGagnant = true;
 
 
     void Awake()
@@ -533,7 +540,7 @@ public class MainMenu : MonoBehaviour
 
         Source.clip = Musique;
         Source.Play();
-        Source.volume = 0.2f;
+        Source.volume = 0.1f;
         Source.loop = true;
 
         player1.GetComponent<PlayerController>().disableMovement = false;
@@ -582,5 +589,105 @@ public class MainMenu : MonoBehaviour
 
         return false;
         
+    }
+
+    public void faireGagner(string nomJoueur)
+    {
+        if(pasDeGagnant)
+        {
+            GameObject Joueur;
+            pasDeGagnant = false;
+            CommencerJeu = false;
+
+            player1.GetComponent<PlayerController>().disableMovement = true;
+            player1.GetComponent<PlayerShoot>().disableMovement = true;
+            player1.GetComponent<PlayerController>().disableHurt = true;
+
+            player2.GetComponent<PlayerController>().disableMovement = true;
+            player2.GetComponent<PlayerShoot>().disableMovement = true;
+            player2.GetComponent<PlayerController>().disableHurt = true;
+
+            player3.GetComponent<PlayerController>().disableMovement = true;    
+            player3.GetComponent<PlayerShoot>().disableMovement = true;
+            player3.GetComponent<PlayerController>().disableHurt = true;
+
+            player4.GetComponent<PlayerController>().disableMovement = true;
+            player4.GetComponent<PlayerShoot>().disableMovement = true;
+            player4.GetComponent<PlayerController>().disableHurt = true;
+
+            if (nomJoueur == player1.name)
+                Joueur = player1;
+           
+            else if (nomJoueur == player2.name)
+                Joueur = player2;
+            
+            else if (nomJoueur == player3.name)
+                Joueur = player3;
+            
+            else
+                Joueur = player4;
+
+            StartCoroutine(Rayon(Joueur, nomJoueur));
+        }
+    }
+
+    IEnumerator Rayon(GameObject Joueur, string Nom)
+    {
+        yield return new WaitForSeconds(2f);
+
+        Source.clip = VoixFin;
+        Source.volume = 1f;
+        Source.Play();
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject clone = Instantiate(rayon, new Vector3(Joueur.transform.position.x, Camera.main.transform.position.y + 8, 0), Quaternion.identity) as GameObject;
+        clone.GetComponent<ScriptBeam>().nameGagnant = Nom;
+
+        yield return new WaitForSeconds(6f);
+
+        if (Nom == player1.name)
+        {
+            if (PlayerPrefs.HasKey("ScoreJoueur1"))
+            {
+                PlayerPrefs.SetInt("ScoreJoueur1", PlayerPrefs.GetInt("ScoreJoueur1") + 1);
+            }
+            else
+                PlayerPrefs.SetInt("ScoreJoueur1", 1);
+            Application.LoadLevel("P1WIN");
+        }
+
+        else if (Nom == player2.name)
+        {
+            if (PlayerPrefs.HasKey("ScoreJoueur2"))
+            {
+                PlayerPrefs.SetInt("ScoreJoueur2", PlayerPrefs.GetInt("ScoreJoueur2") + 1);
+            }
+            else
+                PlayerPrefs.SetInt("ScoreJoueur2", 1);
+            Application.LoadLevel("P2WIN");
+        }
+
+        else if (Nom == player3.name)
+        {
+            if (PlayerPrefs.HasKey("ScoreJoueur3"))
+            {
+                PlayerPrefs.SetInt("ScoreJoueur3", PlayerPrefs.GetInt("ScoreJoueur3") + 1);
+            }
+            else
+                PlayerPrefs.SetInt("ScoreJoueur3", 1);
+            Application.LoadLevel("P3WIN");
+        }
+
+        else
+        {
+            if (PlayerPrefs.HasKey("ScoreJoueur4"))
+            {
+                PlayerPrefs.SetInt("ScoreJoueur4", PlayerPrefs.GetInt("ScoreJoueur4") + 1);
+            }
+            else
+                PlayerPrefs.SetInt("ScoreJoueur4", 1);
+            Application.LoadLevel("P4WIN");
+        }
     }
 }

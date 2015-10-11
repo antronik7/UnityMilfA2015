@@ -39,7 +39,7 @@ public class NbrDeAmmo : MonoBehaviour {
             Vector3 getPixelPosIcone = Camera.main.WorldToScreenPoint(iconePostionDuJoueur.transform.position);
             getPixelPosIcone.y = Screen.height - getPixelPosIcone.y;
 
-            GUI.Label(new Rect((getPixelPosIcone.x - (modifierPositionXCicone * iconePostionDuJoueur.transform.localScale.x)), getPixelPosIcone.y - (modifierPositionYCicone * iconePostionDuJoueur.transform.localScale.y), 100f, 100f), munition.ToString(), guiStylePoliceNbrAmmo);
+            GUI.Label(new Rect((getPixelPosIcone.x - (modifierPositionXCicone * iconePostionDuJoueur.transform.localScale.x)), getPixelPosIcone.y - (modifierPositionYCicone * iconePostionDuJoueur.transform.localScale.y), 100f, 100f), munition.ToString() + "/100", guiStylePoliceNbrAmmo);
     }
 
 

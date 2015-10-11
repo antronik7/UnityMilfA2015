@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject Nes;
     public GameObject Snes;
     public GameObject hurtFeedBack;
+    public GameObject Manager;
 
     private Animator[] animators;
 
@@ -46,6 +47,16 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        //si sa plante remettre sa en bas
+        if (transform.position.y < Camera.main.transform.position.y - 10)
+        {
+            transform.position = spawner.transform.position;
+            Vector2 maForce = new Vector2(0, spawnForce);
+            rb2D.velocity = Vector2.zero;
+            rb2D.AddForce(maForce, ForceMode2D.Force);
+            Hurt();
+        }
+
         if(disableMovement)
         {
             return;
@@ -129,14 +140,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if(transform.position.y < Camera.main.transform.position.y - 10)
-        {
-            transform.position = spawner.transform.position;
-            Vector2 maForce = new Vector2(0, spawnForce);
-            rb2D.velocity = Vector2.zero;
-            rb2D.AddForce(maForce, ForceMode2D.Force);
-            Hurt();
-        }
+        
 
         var absVelY = Mathf.Abs(rb2D.velocity.y);
 
@@ -216,7 +220,7 @@ public class PlayerController : MonoBehaviour {
 
         if(Gagner)
         {
-            Application.LoadLevel(NomSceneWin);
+            Manager.GetComponent<MainMenu>().faireGagner(gameObject.name);
         }
 
         if(standing)

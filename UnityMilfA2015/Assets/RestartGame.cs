@@ -15,6 +15,6 @@ public class RestartGame : MonoBehaviour {
 
     void changerScene()
     {
-        Application.LoadLevel("Mathieu");
+        Application.LoadLevel("SceneMathieu");
     }
 }

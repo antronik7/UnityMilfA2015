@@ -17,6 +17,7 @@ public class PlayerShoot : MonoBehaviour {
     public GameObject spriteNes;
     public GameObject spriteSnes;
     public bool disableMovement = false;
+    public GameObject gameManager;
 
     public float angle = 0.45f;
 
