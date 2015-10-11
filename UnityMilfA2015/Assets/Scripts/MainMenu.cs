@@ -648,6 +648,7 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        Source.loop = false;
         Source.clip = VoixFin;
         Source.volume = 1f;
         Source.Play();
