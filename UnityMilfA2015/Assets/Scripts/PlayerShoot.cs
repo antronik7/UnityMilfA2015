@@ -10,18 +10,12 @@ public class PlayerShoot : MonoBehaviour {
     public int munitionPrecedente;
     public int changerAtari = 30;
     public int changerNes = 60;
-<<<<<<< HEAD
     public int changerSnes = 90;
     public int munitionVictoire = 100;
     public GameObject spritePixel;
     public GameObject spriteAtari;
     public GameObject spriteNes;
     public GameObject spriteSnes;
-=======
-    //public GameObject spritePixel;
-    //public GameObject spriteAtari;
-    //public GameObject spriteNes;
->>>>>>> bc6f9b5f631024560b05c7ac781663bb7682eacf
 
     public float timeBetweenShots = 0.3333f;  // Allow 3 shots per second
     public AudioClip shootSound;
@@ -46,8 +40,6 @@ public class PlayerShoot : MonoBehaviour {
                 nivSprite = 0;
             }
 
-            //GetComponentsInChildren<PlayerController>();
-<<<<<<< HEAD
             spritePixel.SetActive(true);
             spriteAtari.GetComponent<Animator>().enabled = false;
             spriteNes.GetComponent<Animator>().enabled = false;
@@ -56,11 +48,6 @@ public class PlayerShoot : MonoBehaviour {
             spriteAtari.GetComponent<SpriteRenderer>().sprite = null;
             spriteNes.GetComponent<SpriteRenderer>().sprite = null;
             spriteSnes.GetComponent<SpriteRenderer>().sprite = null;
-=======
-            /*spritePixel.SetActive(true);
-            spriteAtari.SetActive(false);
-            spriteNes.SetActive(false);*/
->>>>>>> bc6f9b5f631024560b05c7ac781663bb7682eacf
         }
         else if (munition >= changerAtari && munition < changerNes)
         {
@@ -70,12 +57,6 @@ public class PlayerShoot : MonoBehaviour {
                 GetComponent<PlayerController>().StartLoading();
                 nivSprite = 1;
 
-                /*spritePixel.SetActive(false);
-                spriteAtari.SetActive(true);
-<<<<<<< HEAD
-                spriteNes.SetActive(false);
-                spriteSnes.SetActive(false);*/
-
                 spritePixel.SetActive(false);
                 spriteAtari.GetComponent<Animator>().enabled = true;
                 spriteNes.GetComponent<Animator>().enabled = false;
@@ -83,9 +64,7 @@ public class PlayerShoot : MonoBehaviour {
 
                 spriteNes.GetComponent<SpriteRenderer>().sprite = null;
                 spriteSnes.GetComponent<SpriteRenderer>().sprite = null;
-=======
-                spriteNes.SetActive(false);*/
->>>>>>> bc6f9b5f631024560b05c7ac781663bb7682eacf
+
             }
 
             if (nivSprite > 1)
@@ -93,25 +72,11 @@ public class PlayerShoot : MonoBehaviour {
                 GetComponent<PlayerController>().StartLoading();
                 nivSprite = 1;
 
-                /*spritePixel.SetActive(false);
-                spriteAtari.SetActive(true);
-<<<<<<< HEAD
-                spriteNes.SetActive(false);
-                spriteSnes.SetActive(false);*/
-
                 spritePixel.SetActive(false);
                 spriteAtari.GetComponent<Animator>().enabled = true;
                 spriteNes.GetComponent<Animator>().enabled = false;
                 spriteSnes.GetComponent<Animator>().enabled = false;
-=======
-                spriteNes.SetActive(false);*/
-            }
 
-            /*spritePixel.SetActive(false);
-            spriteAtari.SetActive(true);
-            spriteNes.SetActive(false);*/
-        }
->>>>>>> bc6f9b5f631024560b05c7ac781663bb7682eacf
 
                 spriteNes.GetComponent<SpriteRenderer>().sprite = null;
                 spriteSnes.GetComponent<SpriteRenderer>().sprite = null;
@@ -124,11 +89,6 @@ public class PlayerShoot : MonoBehaviour {
             {
                 GetComponent<PlayerController>().StartLoading();
                 nivSprite = 2;
-
-                /*spritePixel.SetActive(false);
-                spriteAtari.SetActive(false);
-                spriteNes.SetActive(true);
-                spriteSnes.SetActive(false);*/
 
                 spritePixel.SetActive(false);
                 spriteAtari.GetComponent<Animator>().enabled = false;
@@ -143,11 +103,6 @@ public class PlayerShoot : MonoBehaviour {
             {
                 GetComponent<PlayerController>().StartLoading();
                 nivSprite = 2;
-
-                /*spritePixel.SetActive(false);
-                spriteAtari.SetActive(true);
-                spriteNes.SetActive(false);
-                spriteSnes.SetActive(false);*/
 
                 spritePixel.SetActive(false);
                 spriteAtari.GetComponent<Animator>().enabled = false;
@@ -168,12 +123,6 @@ public class PlayerShoot : MonoBehaviour {
                 nivSprite = 3;
             }
 
-            /*spritePixel.SetActive(false);
-<<<<<<< HEAD
-            spriteAtari.SetActive(false);
-            spriteNes.SetActive(false);
-            spriteSnes.SetActive(true);*/
-
             spritePixel.SetActive(false);
             spriteAtari.GetComponent<Animator>().enabled = false;
             spriteNes.GetComponent<Animator>().enabled = false;
@@ -181,9 +130,7 @@ public class PlayerShoot : MonoBehaviour {
 
             spriteAtari.GetComponent<SpriteRenderer>().sprite = null;
             spriteNes.GetComponent<SpriteRenderer>().sprite = null;
-=======
-            spriteAtari.SetActive(true);*/
->>>>>>> bc6f9b5f631024560b05c7ac781663bb7682eacf
+
         }
 
 
@@ -216,10 +163,6 @@ public class PlayerShoot : MonoBehaviour {
                     spriteSnes.GetComponent<Animator>().SetInteger("AnimState", 3);
                 }
 
-                /*foreach (Animator animator in animators)
-                {
-                    animator.SetInteger("AnimState", 3);
-                }*/
             }
             else if (move < -0.45)
             {
@@ -240,10 +183,6 @@ public class PlayerShoot : MonoBehaviour {
                     spriteSnes.GetComponent<Animator>().SetInteger("AnimState", 4);
                 }
 
-                /*oreach (Animator animator in animators)
-                {
-                    animator.SetInteger("AnimState", 4);
-                }*/
             }
             else if (transform.localScale.x > 0)
             {
@@ -264,10 +203,6 @@ public class PlayerShoot : MonoBehaviour {
                     spriteSnes.GetComponent<Animator>().SetInteger("AnimState", 2);
                 }
 
-                /*foreach (Animator animator in animators)
-                {
-                    animator.SetInteger("AnimState", 2);
-                }*/
             }
             else if (transform.localScale.x < 0)
             {
@@ -288,10 +223,6 @@ public class PlayerShoot : MonoBehaviour {
                     spriteSnes.GetComponent<Animator>().SetInteger("AnimState", 2);
                 }
 
-                /*foreach (Animator animator in animators)
-                {
-                    animator.SetInteger("AnimState", 2);
-                }*/
             }
 
             ball.GetComponent<BallController>().Initialize(dirX, dirY);
