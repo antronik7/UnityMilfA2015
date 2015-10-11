@@ -4,6 +4,7 @@ using System.Collections;
 public class RamasserPixels : MonoBehaviour 
 {
     private PlayerShoot Script;
+    public GameObject[] hurtFeedBack;
 
     void OnTriggerEnter2D(Collider2D other)
     {
