@@ -13,11 +13,11 @@ public class RamasserPixels : MonoBehaviour
         {
             Script = other.GetComponent<PlayerShoot>();
 
-            if (this.gameObject.name == "Munition1(Clone)")
+            if (this.gameObject.name == "Munition3(Clone)")
             {
                 AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 10f);
                 Instantiate(pickUPFeedBack[0], transform.position, Quaternion.identity);
-                Script.munition++;
+                Script.munition += 3;
             }
 
             if (this.gameObject.name == "Munition5(Clone)")
