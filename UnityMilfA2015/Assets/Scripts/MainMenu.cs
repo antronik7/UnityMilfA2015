@@ -35,11 +35,32 @@ public class MainMenu : MonoBehaviour
     public GameObject iconePlayer3;
     public GameObject iconePlayer4;
 
+    public int scorePlayer1 = 0;
+    public int scorePlayer2 = 0;
+    public int scorePlayer3 = 0;
+    public int scorePlayer4 = 0;
+
     private AudioSource Source;
     public AudioClip VoixDebut;
     public AudioClip VoixDebut2;
     public AudioClip VoixDebut3;
     public AudioClip Musique;
+
+    public GameObject forme1;
+    public GameObject forme2;
+    public GameObject forme3;
+    public GameObject formeFinal;
+    public GameObject fleche1;
+    public GameObject fleche2;
+    public GameObject fleche3;
+    public GameObject fleche4;
+    public GameObject win;
+
+    public GameObject control;
+    public GameObject lettreX;
+    public GameObject lettreA;
+
+    public bool dejaJouer = false;
 
 
     void Awake()
@@ -151,6 +172,24 @@ public class MainMenu : MonoBehaviour
         btnDeuxPlayer.SetActive(false);
         btnTroisPlayer.SetActive(false);
         btnQuatrePlayer.SetActive(false);
+
+        if (!dejaJouer)
+        {
+            forme1.SetActive(false);
+            forme2.SetActive(false);
+            forme3.SetActive(false);
+            formeFinal.SetActive(false);
+            fleche1.SetActive(false);
+            fleche2.SetActive(false);
+            fleche3.SetActive(false);
+            fleche4.SetActive(false);
+            win.SetActive(false);
+
+            control.SetActive(true);
+            lettreX.SetActive(true);
+            lettreA.SetActive(true);
+        }
+
         AfficherBtnControle();
     }
 
@@ -159,6 +198,13 @@ public class MainMenu : MonoBehaviour
     {
         btnClavier.SetActive(false);
         btnManette.SetActive(false);
+
+        if (!dejaJouer)
+        {
+            control.SetActive(false);
+            lettreX.SetActive(false);
+            lettreA.SetActive(false);
+        }
 
         assignerControle();
     }
@@ -376,12 +422,36 @@ public class MainMenu : MonoBehaviour
         maxMonterCam = maxMonterCam*2;
         faireMouvementCam = true;
         ImageTitle.SetActive(false);
+        if (dejaJouer)
+        {
+           /// DESAFICHER LES SCORES LOLOLOL
+        }
         loadGame();
     }
 
     public void initialiserMenu()
     {
         ImageTitle.SetActive(true);
+
+        dejaJouer = alreadyPlayed();
+
+        if (!dejaJouer)
+        {
+            forme1.SetActive(true);
+            forme2.SetActive(true);
+            forme3.SetActive(true);
+            formeFinal.SetActive(true);
+            fleche1.SetActive(true);
+            fleche2.SetActive(true);
+            fleche3.SetActive(true);
+            fleche4.SetActive(true);
+            win.SetActive(true);
+        }
+        else
+        {
+            ////////////////////////////FAUT FAIRE DES CHOSE
+        }
+
         btnDeuxPlayer.SetActive(true);
         btnTroisPlayer.SetActive(true);
         btnQuatrePlayer.SetActive(true);
@@ -411,5 +481,38 @@ public class MainMenu : MonoBehaviour
         Source.loop = true;
 
         CommencerJeu = true;
+    }
+
+    public bool alreadyPlayed()
+    {
+
+
+        if (PlayerPrefs.HasKey("ScoreJoueur1"))
+        {
+            scorePlayer1 = PlayerPrefs.GetInt("ScoreJoueur1");
+        }
+
+        if (PlayerPrefs.HasKey("ScoreJoueur2"))
+        {
+            scorePlayer2 = PlayerPrefs.GetInt("ScoreJoueur2");
+        }
+
+        if (PlayerPrefs.HasKey("ScoreJoueur3"))
+        {
+            scorePlayer3 = PlayerPrefs.GetInt("ScoreJoueur3");
+        }
+
+        if (PlayerPrefs.HasKey("ScoreJoueur4"))
+        {
+            scorePlayer4 = PlayerPrefs.GetInt("ScoreJoueur4");
+        }
+
+        if (scorePlayer1 != 0 || scorePlayer2 != 0 || scorePlayer3 != 0 || scorePlayer4 != 0)
+        {
+            return true;
+        }
+
+        return false;
+        
     }
 }
