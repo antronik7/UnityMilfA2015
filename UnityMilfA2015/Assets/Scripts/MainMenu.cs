@@ -42,6 +42,16 @@ public class MainMenu : MonoBehaviour
     public GameObject P3;
     public GameObject P4;
 
+    public GameObject disquette1;
+    public GameObject disquette2;
+    public GameObject disquette3;
+    public GameObject disquette4;
+
+    public GameObject Text1;
+    public GameObject Text2;
+    public GameObject Text3;
+    public GameObject Text4;
+
     public GameObject ScoreP1;
     public GameObject ScoreP2;
     public GameObject ScoreP3;
@@ -207,6 +217,14 @@ public class MainMenu : MonoBehaviour
             fleche3.SetActive(false);
             fleche4.SetActive(false);
             win.SetActive(false);
+            disquette1.SetActive(false);
+            disquette2.SetActive(false);
+            disquette3.SetActive(false);
+            disquette4.SetActive(false);
+            Text1.SetActive(false);
+            Text2.SetActive(false);
+            Text3.SetActive(false);
+            Text4.SetActive(false);
 
             control.SetActive(true);
             lettreX.SetActive(true);
@@ -481,6 +499,14 @@ public class MainMenu : MonoBehaviour
             fleche3.SetActive(true);
             fleche4.SetActive(true);
             win.SetActive(true);
+            disquette1.SetActive(true);
+            disquette2.SetActive(true);
+            disquette3.SetActive(true);
+            disquette4.SetActive(true);
+            Text1.SetActive(true);
+            Text2.SetActive(true);
+            Text3.SetActive(true);
+            Text4.SetActive(true);
         }
         else
         {
