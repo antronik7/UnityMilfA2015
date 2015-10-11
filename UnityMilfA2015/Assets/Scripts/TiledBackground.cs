@@ -7,7 +7,7 @@ public class TiledBackground : MonoBehaviour
 
     void Start()
     {
-        float newWidth = Mathf.Ceil(Screen.width / (textureSize * CameraAndCollider.Scale));
+        float newWidth = Mathf.Ceil(Screen.width / (textureSize * CameraAndCollider.Scale) / 4);
         float newHeight = Mathf.Ceil(Screen.height / (textureSize * CameraAndCollider.Scale));
 
         transform.localScale = new Vector3(newWidth * textureSize, newHeight * textureSize, 1);

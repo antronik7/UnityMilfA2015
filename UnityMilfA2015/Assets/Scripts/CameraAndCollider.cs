@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraAndCollider : MonoBehaviour
 {
+    private int NombreEtage = 9;
     private GameObject Mur;
     private bool FinAscension;
     private Camera Cam;
@@ -30,9 +31,7 @@ public class CameraAndCollider : MonoBehaviour
         Mur = (GameObject)Resources.Load("Wall");
 
         if(Cam.orthographic)
-        {
             Scale = Screen.height / NativeResolution.y;
-        }
     }
 
     void Update()
@@ -54,9 +53,10 @@ public class CameraAndCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject);
-        
-        if(other.transform.localScale.y < 0.5 && !FinAscension)
+        if (other.gameObject.name != "Player1" && other.gameObject.name != "Player2" && other.gameObject.name != "Player3" && other.gameObject.name != "Player4")
+            Destroy(other.gameObject);
+
+        if (other.transform.localScale.y == 1f || (other.transform.localScale.y < 2.1f && other.transform.localScale.y > 1.9f) && !FinAscension)
         {
             switch(Random.Range(0,12))
             {
@@ -84,18 +84,27 @@ public class CameraAndCollider : MonoBehaviour
 
             //  On instancie une nouvelle plateforme
             Objet = Instantiate(Plateforme);
+            
+            NombreEtage++;
+
+            Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 6, ObjetP.transform.position.x + 6), NombreEtage * 1.5f, 0);
 
             //  On translate la nouvelle plateforme à une distance de moins de 5 unités de la dernière et à 8.64 units au dessus de la caméra
-            Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 4,
-                ObjetP.transform.position.x + 4), Cam.transform.position.y + 8.64f, 0);
+            if (Random.Range(0, 5) >= 4)
+            {
+                GameObject Objet2;
+                Objet2 = Instantiate(Plateforme);
 
-            //  Si la nouvelle plateforme est sur la même ligne et à gauche de la dernière, translate vers la gauche
-            if (Objet.transform.position.y == ObjetP.transform.position.y && Objet.transform.position.x < ObjetP.transform.position.x)
-                Objet.transform.Translate(Random.Range(-6, -2), 0, 0);
+                Objet2.transform.Translate(Random.Range(ObjetP.transform.position.x - 4, ObjetP.transform.position.x + 4), NombreEtage * 1.5f, 0);
 
-            //  Si la nouvelle plateforme est sur la même ligne et à froite de la dernière, translate vers la droite
-            else if (Objet.transform.position.y == ObjetP.transform.position.y && Objet.transform.position.x > ObjetP.transform.position.x)
-                Objet.transform.Translate(Random.Range(2, 6), 0, 0);
+                //  Si la nouvelle plateforme est sur la même ligne et à gauche de la dernière, translate vers la gauche
+                 if (Objet2.transform.position.x < Objet.transform.position.x)
+                    Objet2.transform.Translate(Random.Range(-8, -4), 0, 0);
+
+                 //  Si la nouvelle plateforme est sur la même ligne et à froite de la dernière, translate vers la droite
+                 else if(Objet2.transform.position.x > Objet.transform.position.x)
+                     Objet2.transform.Translate(Random.Range(4, 8), 0, 0);
+            }
 
             //  Si en dehors de l'écran vers la droite, translate vers la gauche
             if (Objet.transform.position.x > 9)
@@ -106,16 +115,11 @@ public class CameraAndCollider : MonoBehaviour
                 Objet.transform.Translate(Random.Range(6, 10), 0, 0);
 
             //  1 chance sur 5 d'instancier un Pixel
-            if (Random.Range(0, 5) == 1)
+            if (Random.Range(0, 5) >= 4)
                 Instantiate(Pixel).transform.position = Objet.transform.position + (Vector3.up * 0.5f);
             
             //  On garde en mémoire la dernière plateforme instanciée
             ObjetP = Objet;       
         }
-    }
-
-    void TerminerAscension()
-    {
-            
     }
 }

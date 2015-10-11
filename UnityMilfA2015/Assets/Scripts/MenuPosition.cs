@@ -4,7 +4,7 @@ using System.Collections;
 
 
 public class MenuPosition : MonoBehaviour {
-	
+
     //Un premier tableau comprenant les joueurs dans cette ordre (Rouge, Bleu, vert, jaune) que l'on doit drager dans l'interface de unity  
     public GameObject[] Icones;
 
@@ -31,6 +31,11 @@ public class MenuPosition : MonoBehaviour {
 
     public bool finiTrier = false;
 
+    public GUIStyle guiStyle;
+
+    public int modifierPositionXAmmo;
+    public int modifierPositionYAmmo;
+
 	//Ce update sert a trier les positions des joueurs selon le nombre de Ammo
 	void Update () 
     {
@@ -42,7 +47,7 @@ public class MenuPosition : MonoBehaviour {
                 ammo[i] = joueurs[i].GetComponent<PlayerShoot>().munition;
             }
 
-            //Icones.CopyTo(joueursPosition, 0);
+            Icones.CopyTo(joueursPosition, 0);
 
             //On doit choisir la bonne fonction selon le nombre de joueur
             switch (nbrJoueur)
@@ -51,10 +56,12 @@ public class MenuPosition : MonoBehaviour {
                     trierPour2Joueur();
                     break;
 
-                case 3: trierPour3Joueur();
+                case 3: 
+                    trierPour3Joueur();
                     break;
 
-                case 4: trierPour4Joueur();
+                case 4: 
+                    trierPour4Joueur();
                     break;
             }  
         }
@@ -77,8 +84,20 @@ public class MenuPosition : MonoBehaviour {
 
        //Apres on doit affecter les positions dans le canvas
 
-        joueursPosition[1].gameObject.transform.localPosition = new Vector3(posPour1erPositionX, posPour1erPositionY, 10);
-        joueursPosition[0].gameObject.transform.localPosition = new Vector3(posPour2ePositionX, posPour2ePositionY, 10);
+        joueursPosition[0].gameObject.transform.localPosition = new Vector3(posPour1erPositionX, posPour1erPositionY, 10);
+        joueursPosition[1].gameObject.transform.localPosition = new Vector3(posPour2ePositionX, posPour2ePositionY, 10);
+
+        //Pour afficher les ammo des position
+      /*  for (int i = 0; i < nbrJoueur; i++ )
+        {
+            Debug.Log(i + "BOucle");
+            Vector3 getPixelPos = Camera.main.WorldToScreenPoint(joueursPosition[i].gameObject.transform.position);
+            getPixelPos.y = Screen.height - getPixelPos.y;
+
+            GUI.Label(new Rect((getPixelPos.x - (modifierPositionXAmmo * joueursPosition[i].gameObject.transform.localScale.x)), getPixelPos.y - (modifierPositionYAmmo * joueursPosition[i].gameObject.transform.localScale.y), 100f, 100f), ammo[i].ToString(), guiStyle);
+
+        }*/
+       
     }
 
     public void trierPour3Joueur()
@@ -103,10 +122,9 @@ public class MenuPosition : MonoBehaviour {
         }
 
         //Apres on doit affecter les positions dans le canvas
-        joueursPosition[2].gameObject.transform.position = new Vector2(posPour1erPositionX, posPour1erPositionY);
-        joueursPosition[1].gameObject.transform.position = new Vector2(posPour2ePositionX, posPour2ePositionY);
-        joueursPosition[0].gameObject.transform.position = new Vector2(posPour3ePositionX, posPour3ePositionY);
-
+        joueursPosition[2].gameObject.transform.localPosition = new Vector3(posPour1erPositionX, posPour1erPositionY, 10);
+        joueursPosition[1].gameObject.transform.localPosition = new Vector3(posPour2ePositionX, posPour2ePositionY, 10);
+        joueursPosition[0].gameObject.transform.localPosition = new Vector3(posPour3ePositionX, posPour3ePositionY, 10);
     }
 
     public void trierPour4Joueur()
@@ -130,10 +148,13 @@ public class MenuPosition : MonoBehaviour {
         }
 
         //Apres on doit affecter les positions dans le canvas
-        joueursPosition[3].gameObject.transform.position = new Vector2(posPour1erPositionX, posPour1erPositionY);
-        joueursPosition[2].gameObject.transform.position = new Vector2(posPour2ePositionX, posPour2ePositionY);
-        joueursPosition[1].gameObject.transform.position = new Vector2(posPour3ePositionX, posPour3ePositionY);
-        joueursPosition[0].gameObject.transform.position = new Vector2(posPour4ePositionX, posPour4ePositionY);
+        joueursPosition[3].gameObject.transform.localPosition = new Vector3(posPour1erPositionX, posPour1erPositionY, 10);
+        joueursPosition[2].gameObject.transform.localPosition = new Vector3(posPour2ePositionX, posPour2ePositionY, 10);
+        joueursPosition[1].gameObject.transform.localPosition = new Vector3(posPour3ePositionX, posPour3ePositionY, 10);
+        joueursPosition[0].gameObject.transform.localPosition = new Vector3(posPour4ePositionX, posPour4ePositionY, 10);
+
+
+
     }
 
     public void setNbrJoueurs(int nbr)
