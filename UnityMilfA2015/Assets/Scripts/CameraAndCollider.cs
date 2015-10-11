@@ -52,6 +52,7 @@ public class CameraAndCollider : MonoBehaviour
 
         if (Cam.transform.position.y % 110 < 100.2 && Cam.transform.position.y % 110 > 100.12)
             Instantiate(Mur).transform.Translate(0, Cam.transform.position.y + 6, 0);
+
     }
 
     void OnTriggerExit2D(Collider2D other)

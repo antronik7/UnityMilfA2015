@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour {
 
     private Animator[] animators;
 
-
     void Awake()
     {
         animators = GetComponentsInChildren<Animator>();
