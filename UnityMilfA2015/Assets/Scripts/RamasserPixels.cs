@@ -19,7 +19,7 @@ public class RamasserPixels : MonoBehaviour
                 Instantiate(pickUPFeedBack[0], transform.position, Quaternion.identity);
                 Script.munition++;
             }
-            Script.munition++;
+
             if (this.gameObject.name == "Munition5(Clone)")
             {
                 AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 10f);

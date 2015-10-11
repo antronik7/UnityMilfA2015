@@ -7,7 +7,7 @@ public class CameraAndCollider : MonoBehaviour
     private GameObject Mur;
     private bool FinAscension;
     private Camera Cam;
-    private GameObject Objet, Objet2, ObjetP2;
+    private GameObject Objet, Objet2, Objet3, ObjetP2;
     private MainMenu Menu;
     private GameObject Plateforme;
     private GameObject Pixel;
@@ -16,7 +16,10 @@ public class CameraAndCollider : MonoBehaviour
     public GameObject ObjetP;
     public GameObject ScriptMenu;
     public float CameraSpeed;
-    
+    public GameObject Plateforme1;
+    public GameObject Plateforme2;
+    public GameObject Plateforme3;
+    public GameObject Plateforme4;    
 
     public static float PixelsToUnits = 1f;
     public static float Scale = 1f;
@@ -68,50 +71,30 @@ public class CameraAndCollider : MonoBehaviour
                 case 5:
                 case 6:
                 case 7:
-                    Plateforme = (GameObject)Resources.Load("Plateforme4");
+                    Objet = Plateforme1;
                     break;
                 case 8:
                 case 9:
                 case 10:
-                    Plateforme = (GameObject)Resources.Load("Plateforme5");
+                    Objet = Plateforme2;
                     break;
                 case 11:
-                    Plateforme = (GameObject)Resources.Load("Plateforme15");
+                    Objet = Plateforme3;
                     break;
                 default:
-                    Plateforme = (GameObject)Resources.Load("Plateforme3");
+                    Objet = Plateforme4;
                     break;
             }
 
-            switch (Random.Range(0, 10))
-            {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                    Pixel = (GameObject)Resources.Load("Munition1");
-                    break;
-                case 6:
-                case 7:
-                case 8:
-                    Pixel = (GameObject)Resources.Load("Munition5");
-                    break;
-                case 9:
-                    Pixel = (GameObject)Resources.Load("Munition10");
-                    break;
-            }
-
-            Objet = Instantiate(Plateforme);
-            Objet2 = Objet;
+            Plateforme = Instantiate(Objet);
             NombreEtage++;
-            Objet.transform.Translate(Random.Range(ObjetP.transform.position.x - 3, ObjetP.transform.position.x + 3), NombreEtage * 1.5f, 0);
+            Plateforme.transform.Translate(Random.Range(ObjetP.transform.position.x - 3, ObjetP.transform.position.x + 3), NombreEtage * 1.5f, 0);
+            Objet2 = Plateforme;
 
             //  On translate la nouvelle plateforme à une distance de moins de 5 unités de la dernière et à 8.64 units au dessus de la caméra
-            if (Random.Range(0, 5) <= 3)
+            if (Random.Range(0, 6) <= 4)
             {
-                Objet2 = Instantiate(Plateforme);
+                Objet2 = Instantiate(Objet);
 
                 Objet2.transform.Translate(Random.Range(ObjetP.transform.position.x - 5, ObjetP.transform.position.x + 5), NombreEtage * 1.5f, 0);
 
@@ -122,14 +105,31 @@ public class CameraAndCollider : MonoBehaviour
                 //  Si la nouvelle plateforme est sur la même ligne et à froite de la dernière, translate vers la droite
                 else if (Objet2.transform.position.x > Objet.transform.position.x)
                     Objet2.transform.Translate(Random.Range(4, 8), 0, 0);
+
             }
 
-            if(Random.Range(0, 5) <= 2)
+            if (Random.Range(0, 6) <= 3)
+            {
+                Objet3 = Instantiate(Objet);
+
+                Objet3.transform.Translate(Random.Range(ObjetP.transform.position.x - 5, ObjetP.transform.position.x + 5), NombreEtage * 1.5f, 0);
+
+                //  Si la nouvelle plateforme est sur la même ligne et à gauche de la dernière, translate vers la gauche
+                if (Objet3.transform.position.x < Objet.transform.position.x)
+                    Objet3.transform.Translate(Random.Range(-8, -4), 0, 0);
+
+                //  Si la nouvelle plateforme est sur la même ligne et à froite de la dernière, translate vers la droite
+                else if (Objet3.transform.position.x > Objet.transform.position.x)
+                    Objet3.transform.Translate(Random.Range(4, 8), 0, 0);
+            }
+
+            if(Random.Range(0, 7) <= 5)
             {
                 SpikeInst = Instantiate(Spike);
-                SpikeInst.transform.Translate(Random.Range(-10, 10), NombreEtage * 1.5f, 0);
+                SpikeInst.transform.Translate(Random.Range(0, 20), NombreEtage * 1.5f, 0);
 
-                if(Vector2.Distance(SpikeInst.transform.position, Objet.transform.position) < 3 || Vector2.Distance(SpikeInst.transform.position, Objet2.transform.position) < 3)
+                if(Vector2.Distance(SpikeInst.transform.position, Objet.transform.position) < 1 || Vector2.Distance(SpikeInst.transform.position, Objet2.transform.position) < 1
+                    || Vector2.Distance(SpikeInst.transform.position, Objet3.transform.position) < 1)
                 {
                     SpikeInst.transform.Translate(0, (NombreEtage + 30) * 1.5f, 0);
                 }
@@ -142,10 +142,22 @@ public class CameraAndCollider : MonoBehaviour
             //  Si en dehors de l'écran vers la gauche, translate vers la droite
             else if (Objet.transform.position.x < -9)
                 Objet.transform.Translate(Random.Range(10, 15), 0, 0);
-            
-            //  1 chance sur 5 d'instancier un Pixel
-            if (Random.Range(0, 5) >= 3)
-                Instantiate(Pixel).transform.position = Objet.transform.position + (Vector3.up * 0.5f);
+
+            //  Si en dehors de l'écran vers la droite, translate vers la gauche
+            if (Objet2.transform.position.x > 9)
+                Objet2.transform.Translate(Random.Range(-15, -10), 0, 0);
+
+            //  Si en dehors de l'écran vers la gauche, translate vers la droite
+            else if (Objet2.transform.position.x < -9)
+                Objet2.transform.Translate(Random.Range(10, 15), 0, 0);
+
+            //  Si en dehors de l'écran vers la droite, translate vers la gauche
+            if (Objet3.transform.position.x > 9)
+                Objet3.transform.Translate(Random.Range(-15, -10), 0, 0);
+
+            //  Si en dehors de l'écran vers la gauche, translate vers la droite
+            else if (Objet3.transform.position.x < -9)
+                Objet3.transform.Translate(Random.Range(10, 15), 0, 0);
             
             //  On garde en mémoire la dernière plateforme instanciée
             ObjetP = Objet;

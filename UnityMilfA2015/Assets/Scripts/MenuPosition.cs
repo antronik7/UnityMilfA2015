@@ -42,7 +42,7 @@ public class MenuPosition : MonoBehaviour {
         if(nbrJoueur != 0)
         {
             //On creer le tableau qui contient juste les munitions
-            for (int i = 0; i < joueurs.Length - 2; i++)//////////////////////////TEMPORAIRE
+            for (int i = 0; i < joueurs.Length; i++)
             {
                 ammo[i] = joueurs[i].GetComponent<PlayerShoot>().munition;
             }

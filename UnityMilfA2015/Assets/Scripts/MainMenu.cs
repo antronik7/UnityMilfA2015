@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public float CameraSpeed = 3.3f;
     public bool faireMouvementCam = false;
-    public float maxMonterCam = 6f;
+    public float maxMonterCam = 14f;
 
     public bool faireMouvementBtnJoueur = false;
     public float MenuSpeed = 0.1f;
@@ -89,7 +89,7 @@ public class MainMenu : MonoBehaviour
             Camera.main.transform.Translate(Vector3.up * CameraSpeed * Time.deltaTime);
         }
 
-        if (Camera.main.transform.position.y > CameraY + 7)
+        if (Camera.main.transform.position.y > CameraY + 14)
         {
             faireMouvementCam = false;
         }
@@ -120,7 +120,6 @@ public class MainMenu : MonoBehaviour
         nbrJoueur = 2;
         GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
 
-        MonterCam();
         DetruireBtnNbrJoueur();
 	}
 
@@ -132,7 +131,7 @@ public class MainMenu : MonoBehaviour
         nbrJoueur = 3;
         GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
         
-        MonterCam();
+ 
         DetruireBtnNbrJoueur();
     }
 
@@ -144,7 +143,6 @@ public class MainMenu : MonoBehaviour
         nbrJoueur = 4;
         GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
 
-        MonterCam();
         DetruireBtnNbrJoueur();
     }
 
@@ -232,6 +230,8 @@ public class MainMenu : MonoBehaviour
     //Fonctoin qui load la prochaine Scene
     public void loadGame()
     {
+        
+
         //Activer les joueurs
         player1.SetActive(true);
         player2.SetActive(true);
@@ -242,14 +242,15 @@ public class MainMenu : MonoBehaviour
         switch (nbrJoueur)
         {
             case 3: player3.SetActive(true);
-                    iconePlayer3.SetActive(true);
+                iconePlayer3.SetActive(true);
                 break;
             case 4: player3.SetActive(true);
-                    player4.SetActive(true);
-                    iconePlayer3.SetActive(true);
-                    iconePlayer4.SetActive(true);
+                player4.SetActive(true);
+                iconePlayer3.SetActive(true);
+                iconePlayer4.SetActive(true);
                 break;
         }
+        
 
         StartCoroutine(MaCoroutine());
     }
@@ -431,7 +432,6 @@ public class MainMenu : MonoBehaviour
             }
         }
 
-        maxMonterCam = maxMonterCam*2;
         faireMouvementCam = true;
         ImageTitle.SetActive(false);
 
@@ -504,6 +504,18 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator MaCoroutine()
     {
+        player1.GetComponent<PlayerController>().disableMovement = true;
+        player1.GetComponent<PlayerShoot>().disableMovement = true;
+
+        player2.GetComponent<PlayerController>().disableMovement = true;
+        player2.GetComponent<PlayerShoot>().disableMovement = true;
+
+        player3.GetComponent<PlayerController>().disableMovement = true;
+        player3.GetComponent<PlayerShoot>().disableMovement = true;
+
+        player4.GetComponent<PlayerController>().disableMovement = true;
+        player4.GetComponent<PlayerShoot>().disableMovement = true;
+
         Source.clip = VoixDebut;
         Source.Play();
 
@@ -523,6 +535,18 @@ public class MainMenu : MonoBehaviour
         Source.Play();
         Source.volume = 0.2f;
         Source.loop = true;
+
+        player1.GetComponent<PlayerController>().disableMovement = false;
+        player1.GetComponent<PlayerShoot>().disableMovement = false;
+
+        player2.GetComponent<PlayerController>().disableMovement = false;
+        player2.GetComponent<PlayerShoot>().disableMovement = false;
+
+        player3.GetComponent<PlayerController>().disableMovement = false;
+        player3.GetComponent<PlayerShoot>().disableMovement = false;
+
+        player4.GetComponent<PlayerController>().disableMovement = false;
+        player4.GetComponent<PlayerShoot>().disableMovement = false;
 
         CommencerJeu = true;
     }
