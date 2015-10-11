@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     public GameObject btnClavier;
     public GameObject btnManette;
 
-    static public int nbrJoueur;
+    public int nbrJoueur;
     public bool clavier;
 
     public float CameraSpeed = 3.3f;
@@ -65,6 +65,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("nrbJoueur", 2);
         nbrJoueur = 2;
+        GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
 
         MonterCam();
         DetruireBtnNbrJoueur();
@@ -76,7 +77,7 @@ public class MainMenu : MonoBehaviour
 
         PlayerPrefs.SetInt("nrbJoueur", 3);
         nbrJoueur = 3;
-        Debug.Log(nbrJoueur);
+        GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
         
         MonterCam();
         DetruireBtnNbrJoueur();
@@ -89,6 +90,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("nrbJoueur", 4);
         MonterCam();
         nbrJoueur = 4;
+        GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
         DetruireBtnNbrJoueur();
     }
 
@@ -296,10 +298,5 @@ public class MainMenu : MonoBehaviour
         btnTroisPlayer.SetActive(true);
         btnQuatrePlayer.SetActive(true);
         initialiserControle();
-    }
-
-    public int GetNbrJoueur()
-    {
-        return nbrJoueur;
     }
 }
