@@ -316,4 +316,35 @@ public class PlayerController : MonoBehaviour {
     {
         animationLoading.GetComponent<Animator>().SetTrigger("TriggerLoaging");
     }
+
+    public void initialiserMesControle(int numJoueur)
+    {        
+        switch (numJoueur)
+        { 
+            //Joueur 1
+            case 1:
+                HoriAxis = PlayerPrefs.GetString("1Horizontal");
+                jumpBouton = PlayerPrefs.GetString("1Jump");
+                fireButton = PlayerPrefs.GetString("1Fire");
+                break;
+            //Joueur 2
+            case 2:
+                HoriAxis = PlayerPrefs.GetString("2Horizontal");
+                jumpBouton = PlayerPrefs.GetString("2Jump");
+                fireButton = PlayerPrefs.GetString("2Fire");
+                break;
+            //Joueur 3
+            case 3:
+                HoriAxis = PlayerPrefs.GetString("3Horizontal");
+                jumpBouton = PlayerPrefs.GetString("3Jump");
+                fireButton = PlayerPrefs.GetString("3Fire");
+                break;
+            //Joueur 4
+            case 4:
+                HoriAxis = PlayerPrefs.GetString("4Horizontal");
+                jumpBouton = PlayerPrefs.GetString("4Jump");
+                fireButton = PlayerPrefs.GetString("4Fire");
+                break;
+        }
+    }
 }

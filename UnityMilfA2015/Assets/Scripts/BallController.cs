@@ -4,9 +4,19 @@ using System.Collections;
 public class BallController : MonoBehaviour {
 
     public int speedBullet = 6;
+    public Sprite[] lesBits;
 	// Use this for initialization
 	void Start () {
-	
+
+        if (Random.Range(0, 1) > 0.5)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = lesBits[0];
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = lesBits[0];
+        }
+            
 	}
 	
 	// Update is called once per frame
