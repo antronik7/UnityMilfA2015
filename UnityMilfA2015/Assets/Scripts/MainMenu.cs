@@ -25,6 +25,17 @@ public class MainMenu : MonoBehaviour
 
     public GameObject ImageTitle;
 
+    public GameObject player1;
+    public GameObject player2;
+    public GameObject player3;
+    public GameObject player4;
+
+    public GameObject iconePlayer1;
+    public GameObject iconePlayer2;
+    public GameObject iconePlayer3;
+    public GameObject iconePlayer4;
+
+
     void Awake()
     {
         CommencerJeu = false;
@@ -90,9 +101,10 @@ public class MainMenu : MonoBehaviour
     {
 
         PlayerPrefs.SetInt("nrbJoueur", 4);
-        MonterCam();
         nbrJoueur = 4;
         GetComponent<MenuPosition>().setNbrJoueurs(nbrJoueur);
+
+        MonterCam();
         DetruireBtnNbrJoueur();
     }
 
@@ -156,6 +168,26 @@ public class MainMenu : MonoBehaviour
     public void loadGame()
     {
         CommencerJeu = true;
+
+        //Activer les joueurs
+        player1.SetActive(true);
+        player2.SetActive(true);
+
+        iconePlayer1.SetActive(true);
+        iconePlayer2.SetActive(true);
+
+        switch (nbrJoueur)
+        {
+            case 3: player3.SetActive(true);
+                    iconePlayer3.SetActive(true);
+                break;
+            case 4: player3.SetActive(true);
+                    player4.SetActive(true);
+                    iconePlayer3.SetActive(true);
+                    iconePlayer4.SetActive(true);
+                break;
+        }
+
     }
 
     //Fonction qui reinitialise les controles des joueurs
