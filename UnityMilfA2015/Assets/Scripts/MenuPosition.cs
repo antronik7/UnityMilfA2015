@@ -57,7 +57,7 @@ public class MenuPosition : MonoBehaviour {
                     break;
 
                 case 3: 
-                    trierPour4Joueur();
+                    trierPour3Joueur();
                     break;
 
                 case 4: 
@@ -88,20 +88,20 @@ public class MenuPosition : MonoBehaviour {
         joueursPosition[1].gameObject.transform.localPosition = new Vector3(posPour2ePositionX, posPour2ePositionY, 10);
 
         //Pour afficher les ammo des position
-        for (int i = 0; i < ammo.Length; i++ )
+      /*  for (int i = 0; i < nbrJoueur; i++ )
         {
+            Debug.Log(i + "BOucle");
             Vector3 getPixelPos = Camera.main.WorldToScreenPoint(joueursPosition[i].gameObject.transform.position);
             getPixelPos.y = Screen.height - getPixelPos.y;
 
             GUI.Label(new Rect((getPixelPos.x - (modifierPositionXAmmo * joueursPosition[i].gameObject.transform.localScale.x)), getPixelPos.y - (modifierPositionYAmmo * joueursPosition[i].gameObject.transform.localScale.y), 100f, 100f), ammo[i].ToString(), guiStyle);
 
-        }
+        }*/
        
     }
 
     public void trierPour3Joueur()
     {
-        Icones.CopyTo(joueursPosition, 0);
         //On fait un bubble sort sur le tableau de int ammo et on recopie les meme mouvements dans le tableau des joueurPosition
         for (int i = ammo.Length - 1; i > 0; i--)
         {
