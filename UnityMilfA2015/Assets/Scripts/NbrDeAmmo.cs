@@ -17,7 +17,6 @@ public class NbrDeAmmo : MonoBehaviour {
     
     void OnGUI()
     {
-
             munition = this.GetComponent<PlayerShoot>().munition;
 
             //On doit verifer dans quel sens le joueur va
