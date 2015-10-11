@@ -232,6 +232,10 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetString("1Fire", "1FireClavier");
             PlayerPrefs.SetString("1Jump", "1JumpClavier");
 
+            player1.GetComponent<PlayerController>().initialiserMesControle(1);
+            player1.GetComponent<PlayerShoot>().initialiserMesControle(1);
+            player1.GetComponent<PlayerShoot>().initialiserAngle(0);
+
             switch (nbrJoueur)
             {
                 case 1:
@@ -239,18 +243,27 @@ public class MainMenu : MonoBehaviour
                     PlayerPrefs.SetString("2Vertical", "1VerticalManette");
                     PlayerPrefs.SetString("2Fire", "1FireManette");
                     PlayerPrefs.SetString("1Jump", "1JumpManette");
+
+                    player2.GetComponent<PlayerController>().initialiserMesControle(2);
+                    player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
                     break;
                 
                 case 2:
                     PlayerPrefs.SetString("2Horizontal", "1HorizontalManette");
                     PlayerPrefs.SetString("2Vertical", "1VerticalManette");
                     PlayerPrefs.SetString("2Fire", "1FireManette");
-                    PlayerPrefs.SetString("1Jump", "");
+                    PlayerPrefs.SetString("2Jump", "1JumpManette");
+
+                    player2.GetComponent<PlayerController>().initialiserMesControle(2);
+                    player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
 
                     PlayerPrefs.SetString("3Horizontal", "2HorizontalManette");
                     PlayerPrefs.SetString("3Vertical", "2VerticalManette");
                     PlayerPrefs.SetString("3Fire", "2FireManette");
-                    PlayerPrefs.SetString("1Jump", "2JumpManette");
+                    PlayerPrefs.SetString("3Jump", "2JumpManette");
+
+                    player3.GetComponent<PlayerController>().initialiserMesControle(3);
+                    player3.GetComponent<PlayerShoot>().initialiserMesControle(3);
                     break;
                 
                 case 3: 
@@ -259,15 +272,24 @@ public class MainMenu : MonoBehaviour
                     PlayerPrefs.SetString("2Fire", "1FireManette");
                     PlayerPrefs.SetString("2Jump", "1JumpManette");
 
+                    player2.GetComponent<PlayerController>().initialiserMesControle(2);
+                    player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
+
                     PlayerPrefs.SetString("3Horizontal", "2HorizontalManette");
                     PlayerPrefs.SetString("3Vertical", "2VerticalManette");
                     PlayerPrefs.SetString("3Fire", "2FireManette");
                     PlayerPrefs.SetString("3Jump", "2JumpManette");
 
+                    player3.GetComponent<PlayerController>().initialiserMesControle(3);
+                    player3.GetComponent<PlayerShoot>().initialiserMesControle(3);
+
                     PlayerPrefs.SetString("4Horizontal", "3HorizontalManette");
                     PlayerPrefs.SetString("4Vertical", "3VerticalManette");
                     PlayerPrefs.SetString("4Fire", "3FireManette");
                     PlayerPrefs.SetString("4Jump", "3JumpManette");
+
+                    player4.GetComponent<PlayerController>().initialiserMesControle(4);
+                    player4.GetComponent<PlayerShoot>().initialiserMesControle(4);
                     break;
             }
         }
@@ -279,6 +301,11 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetString("1Fire", "1Fire1");
             PlayerPrefs.SetString("1Jump", "1JumpManette");
 
+            player1.GetComponent<PlayerController>().initialiserMesControle(1);
+            player1.GetComponent<PlayerShoot>().initialiserMesControle(1);
+            player1.GetComponent<PlayerShoot>().initialiserAngle(1);
+
+
             switch (nbrJoueur)
             {
                 case 1:
@@ -288,6 +315,9 @@ public class MainMenu : MonoBehaviour
                     PlayerPrefs.SetString("2Jump", "2JumpManette");
                     break;
 
+                    player2.GetComponent<PlayerController>().initialiserMesControle(2);
+                    player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
+
                 case 2:
 
                     PlayerPrefs.SetString("2Horizontal", "2HorizontalManette");
@@ -295,10 +325,17 @@ public class MainMenu : MonoBehaviour
                     PlayerPrefs.SetString("2Fire", "2FireManette");
                     PlayerPrefs.SetString("2Jump", "2JumpManette");
 
+                    player2.GetComponent<PlayerController>().initialiserMesControle(2);
+                    player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
+
                     PlayerPrefs.SetString("3Horizontal", "3HorizontalManette");
                     PlayerPrefs.SetString("3Vertical", "3VerticalManette");
                     PlayerPrefs.SetString("3Fire", "3FireManette");
                     PlayerPrefs.SetString("3Jump", "3JumpManette");
+
+                    player3.GetComponent<PlayerController>().initialiserMesControle(3);
+                    player3.GetComponent<PlayerShoot>().initialiserMesControle(3);
+
                     break;
 
                 case 3:
@@ -307,15 +344,24 @@ public class MainMenu : MonoBehaviour
                     PlayerPrefs.SetString("2Fire", "2FireManette");
                     PlayerPrefs.SetString("2Jump", "2JumpManette");
 
+                    player2.GetComponent<PlayerController>().initialiserMesControle(2);
+                    player2.GetComponent<PlayerShoot>().initialiserMesControle(2);
+
                     PlayerPrefs.SetString("3Horizontal", "3HorizontalManette");
                     PlayerPrefs.SetString("3Vertical", "3VerticalManette");
                     PlayerPrefs.SetString("3Fire", "3FireManette");
                     PlayerPrefs.SetString("3Jump", "3JumpManette");
 
+                    player3.GetComponent<PlayerController>().initialiserMesControle(3);
+                    player3.GetComponent<PlayerShoot>().initialiserMesControle(3);
+
                     PlayerPrefs.SetString("4Horizontal", "4HorizontalManette");
                     PlayerPrefs.SetString("4Vertical", "4VerticalManette");
                     PlayerPrefs.SetString("4Fire", "4FireManette");
                     PlayerPrefs.SetString("4Jump", "4JumpManette");
+
+                    player4.GetComponent<PlayerController>().initialiserMesControle(4);
+                    player4.GetComponent<PlayerShoot>().initialiserMesControle(4);
 
                     break;
             }
